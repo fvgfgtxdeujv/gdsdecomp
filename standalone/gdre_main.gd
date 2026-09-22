@@ -455,7 +455,7 @@ func _on_setenc_key_ok_pressed():
 		if (err != OK):
 			keytextbox.text = ""
 			# pop up an accept dialog
-			$SetEncryptionKeyWindow.popup_error_box(tr("Invalid key!\nKey must be a hex string with ") + str(GDRESettings.get_required_key_size_in_bytes() * 2) + " characters", tr("Error"))
+			$SetEncryptionKeyWindow.popup_error_box(tr("Invalid key!\nKey must be a hex string with ") + str(GDRESettings.get_required_key_size_in_bytes() * 2) + tr(" characters"), tr("Error"))
 			return
 
 	# close the window
