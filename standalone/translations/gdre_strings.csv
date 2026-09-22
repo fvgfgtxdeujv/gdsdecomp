@@ -1,281 +1,282 @@
 keys,en,zh_CN
-"Compile GDScript","Compile GDScript",
-"Add files...","Add files...",
-"Remove files","Remove files",
-"Clear files","Clear files",
-"Script files:","Script files:",
-"Script bytecode version:","Script bytecode version:",
-"Destination folder:","Destination folder:",
-"Compile","Compile",
-"Cancel","Cancel",
-"No destination folder selected","No destination folder selected",
-"No files selected","No files selected",
-"No bytecode version selected","No bytecode version selected",
-"Decompile GDScript","Decompile GDScript",
-"Decompile","Decompile",
-"Set encryption key","Set encryption key",
-"Script encryption key (64 character hex string):","Script encryption key (64 character hex string):",
-"Set","Set",
-"No encryption key","No encryption key",
-"Invalid encryption key (must be 64 characters long hex)","Invalid encryption key (must be 64 characters long hex)",
-"Create new PCK...","Create new PCK...",
-"PCK version (""0"" - Godot 2.x; ""1"" - Godot 3.x; ""2"" - Godot 4.x):","PCK version (""0"" - Godot 2.x; ""1"" - Godot 3.x; ""2"" - Godot 4.x):",
-"Encryption:","Encryption:",
-"Godot engine version (""Major"".""Minor"".""Patch"", ""Patch"" value should be ""0"" for all pre 3.2 versions):","Godot engine version (""Major"".""Minor"".""Patch"", ""Patch"" value should be ""0"" for all pre 3.2 versions):",
-"Embed PCK:","Embed PCK:",
-"Extra tag:","Extra tag:",
-"Save...","Save...",
-"PCK explorer","PCK explorer",
-"Version:","Version:",
-"Information:","Information:",
-"File name","File name",
-"Size","Size",
-"Info","Info",
-"Files:","Files:",
-"Options:","Options:",
-"Extract...","Extract...",
-"Some files have malformed names","Some files have malformed names",
-"OK","OK",
-"Files already exist!","Files already exist!",
-"Following files already exist and will be overwritten:","Following files already exist and will be overwritten:",
-"Overwrite","Overwrite",
-"Important: Legal Notice","Important: Legal Notice",
-"Show this warning when starting the editor","Show this warning when starting the editor",
+"Compile GDScript","Compile GDScript","编译 GDScript"
+"Add files...","Add files...","添加文件..."
+"Remove files","Remove files","移除文件"
+"Clear files","Clear files","清空文件"
+"Script files:","Script files:","脚本文件："
+"Script bytecode version:","Script bytecode version:","脚本字节码版本："
+"Destination folder:","Destination folder:","目标文件夹："
+"Compile","Compile","编译"
+"Cancel","Cancel","取消"
+"No destination folder selected","No destination folder selected","未选择目标文件夹"
+"No files selected","No files selected","未选择文件"
+"No bytecode version selected","No bytecode version selected","未选择字节码版本"
+"Decompile GDScript","Decompile GDScript","反编译 GDScript"
+"Decompile","Decompile","反编译"
+"Set encryption key","Set encryption key","设置加密密钥"
+"Script encryption key (64 character hex string):","Script encryption key (64 character hex string):","脚本加密密钥（64 个字符的十六进制字符串）："
+"Set","Set","设置"
+"No encryption key","No encryption key","未设置加密密钥"
+"Invalid encryption key (must be 64 characters long hex)","Invalid encryption key (must be 64 characters long hex)","无效的加密密钥（必须为 64 个字符的十六进制）"
+"Create new PCK...","Create new PCK...","创建新 PCK..."
+"PCK version (""0"" - Godot 2.x; ""1"" - Godot 3.x; ""2"" - Godot 4.x):","PCK version (""0"" - Godot 2.x; ""1"" - Godot 3.x; ""2"" - Godot 4.x):","PCK 版本（""0"" - Godot 2.x；""1"" - Godot 3.x；""2"" - Godot 4.x）："
+"Encryption:","Encryption:","加密："
+"Godot engine version (""Major"".""Minor"".""Patch"", ""Patch"" value should be ""0"" for all pre 3.2 versions):","Godot engine version (""Major"".""Minor"".""Patch"", ""Patch"" value should be ""0"" for all pre 3.2 versions):","Godot 引擎版本（""Major"".""Minor"".""Patch""，3.2 之前所有版本的 ""Patch"" 应为 ""0""）："
+"Embed PCK:","Embed PCK:","内嵌 PCK："
+"Extra tag:","Extra tag:","额外标签："
+"Save...","Save...","保存..."
+"PCK explorer","PCK explorer","PCK 浏览器"
+"Version:","Version:","版本："
+"Information:","Information:","信息："
+"File name","File name","文件名"
+"Size","Size","大小"
+"Info","Info","信息"
+"Files:","Files:","文件："
+"Options:","Options:","选项："
+"Extract...","Extract...","提取..."
+"Some files have malformed names","Some files have malformed names","部分文件名称异常"
+"OK","OK","确定"
+"Files already exist!","Files already exist!","文件已存在！"
+"Following files already exist and will be overwritten:","Following files already exist and will be overwritten:","以下文件已存在，将被覆盖："
+"Overwrite","Overwrite","覆盖"
+"Important: Legal Notice","Important: Legal Notice","重要：法律声明"
+"Show this warning when starting the editor","Show this warning when starting the editor","启动编辑器时显示此警告"
 "RE Tools","RE Tools","RE 工具"
 "Recover project...","Recover project...","恢复项目..."
-"Set encryption key...","Set encryption key...",
+"Set encryption key...","Set encryption key...","设置加密密钥..."
 "About Godot RE Tools","About Godot RE Tools","关于 Godot RE Tools"
 "Report a bug...","Report a bug...","报告 bug..."
 "Quit","Quit","退出"
 "PCK","PCK",
-"Create PCK archive from folder...","Create PCK archive from folder...",
+"Create PCK archive from folder...","Create PCK archive from folder...","从文件夹创建 PCK 归档..."
 "GDScript","GDScript",
-"Decompile .GDC/.GDE script files...","Decompile .GDC/.GDE script files...",
-"Compile .GD script files...","Compile .GD script files...",
-"Resources","Resources",
-"Convert binary resources to text...","Convert binary resources to text...",
-"Convert text resources to binary...","Convert text resources to binary...",
-"Convert stream textures to PNG...","Convert stream textures to PNG...",
-"Convert OGG Samples to OGG...","Convert OGG Samples to OGG...",
-"Convert WAV Samples to WAV...","Convert WAV Samples to WAV...",
-"Export Resource...","Export Resource...",
-"Invalid bytecode version!","Invalid bytecode version!",
-"Decompiling files...","Decompiling files...",
-"decompiling","decompiling",
-"At least one error was detected!","At least one error was detected!",
-"No errors detected.","No errors detected.",
-"The operation completed successfully!","The operation completed successfully!",
-"Compiling files...","Compiling files...",
-"compiling","compiling",
-"Error opening encrypted PCK file: ","Error opening encrypted PCK file: ",
-"Read PCK","Read PCK",
-"Error opening PCK file: ","Error opening PCK file: ",
-"Total files: ","Total files: ",
-"Checked: ","Checked: ",
-"Broken: ","Broken: ",
-"Recovery report","Recovery report",
-"Extract report","Extract report",
-"Converting files...","Converting files...",
-"Convert WAV samples","Convert WAV samples",
-"Convert OGG samples","Convert OGG samples",
-"Convert textures","Convert textures",
-"Convert resources","Convert resources",
-"No exporters found for resource ","No exporters found for resource ",
-"Exporting resources...","Exporting resources...",
-"Export resources","Export resources",
-"Error opening folder (or empty folder): ","Error opening folder (or empty folder): ",
-"New PCK","New PCK",
-"%d replaced.","%d replaced.",
-"No matches","No matches",
-"%s Mipmaps","%s Mipmaps",
-"Memory: %s","Memory: %s",
-"No Mipmaps","No Mipmaps",
-"Failed to create decompiler for version: ","Failed to create decompiler for version: ",
-"Decompiler Error","Decompiler Error",
-"Error","Error",
-"Failed to read file: ","Failed to read file: ",
-"File Error","File Error",
-"Failed to compile file: ","Failed to compile file: ",
-"Compile Error","Compile Error",
-"Failed to open file for writing: ","Failed to open file for writing: ",
-"The following files were successfully compiled: ","The following files were successfully compiled: ",
-"Compile Complete","Compile Complete",
-"Failed to decompile file: ","Failed to decompile file: ",
-"Decompile Error","Decompile Error",
-"The following files were successfully decompiled: ","The following files were successfully decompiled: ",
-"Decompile Complete","Decompile Complete",
-"ERROR: Failed to get bytecode buffer for encrypted file (did you set the encryption key?)","ERROR: Failed to get bytecode buffer for encrypted file (did you set the encryption key?)",
-"ERROR: Failed to open file: ","ERROR: Failed to open file: ",
-"WARNING: Failed to create decompiler for revision: ","WARNING: Failed to create decompiler for revision: ",
-"WARNING: bytecode test failed for file: ","WARNING: bytecode test failed for file: ",
-"Invalid GDScript bytecode file: ","Invalid GDScript bytecode file: ",
-"No bytecode versions found","No bytecode versions found",
-"Multiple bytecode versions found: ","Multiple bytecode versions found: ",
-"Select a file and bytecode version to see the decompiled code","Select a file and bytecode version to see the decompiled code",
-"Select a bytecode version to see the decompiled code","Select a bytecode version to see the decompiled code",
-"Select a file to see the decompiled code","Select a file to see the decompiled code",
-"Hide Preview","Hide Preview",
-"Show Preview...","Show Preview...",
-"--- Please select bytecode version ---","--- Please select bytecode version ---",
-"Directory is not selected","Directory is not selected",
-"Embed source is empty","Embed source is empty",
-"ERROR:","ERROR:",
-"*.exe,*.bin,*.32,*.64;Self contained executable files","*.exe,*.bin,*.32,*.64;Self contained executable files",
-"*.pck;PCK files","*.pck;PCK files",
-"Directory Structure","Directory Structure",
-"Export Scenes as","Export Scenes as",
-"Export Meshes as","Export Meshes as",
-"Flat","Flat",
-"Relative Hierarchical","Relative Hierarchical",
-"Absolute Hierarchical","Absolute Hierarchical",
-"Auto","Auto",
-"Failed to convert project config: ","Failed to convert project config: ",
-"Failed to export resource: ","Failed to export resource: ",
-"Exporting cancelled: ","Exporting cancelled: ",
-"Failed to export file: ","Failed to export file: ",
-"Success","Success",
-"Open Folder","Open Folder",
-"Successfully exported resources","Successfully exported resources",
-"Successfully extracted resources","Successfully extracted resources",
-"Extract Selected...","Extract Selected...",
-"Export Selected...","Export Selected...",
-"Broken files: ","Broken files: ",
-"Malformed paths: ","Malformed paths: ",
-"Hide Resource Preview","Hide Resource Preview",
-"Show Resource Preview...","Show Resource Preview...",
-"C# Assembly","C# Assembly",
-"C# Assembly ⚠️","C# Assembly ⚠️",
-"File is NativeAOT assembly, not supported by GDRE Tools","File is NativeAOT assembly, not supported by GDRE Tools",
-"File is not a valid .NET IL assembly (corrupt?)","File is not a valid .NET IL assembly (corrupt?)",
-"File does not exist","File does not exist",
-"Error: selected PCK(s) are already loaded","Error: selected PCK(s) are already loaded",
-"Error: failed to open ","Error: failed to open ",
-"Load a pack first!","Load a pack first!",
-"You can only patch one PCK at a time","You can only patch one PCK at a time",
-"File","File",
-"Mapping","Mapping",
-"Map to Folder...","Map to Folder...",
-"Error: You can only use this to patch PCKs or embedded PCKs","Error: You can only use this to patch PCKs or embedded PCKs",
-"*.exe,*.bin,*.32,*.64,*.arm64,*.arm32;Self contained executable files","*.exe,*.bin,*.32,*.64,*.arm64,*.arm32;Self contained executable files",
-"Validation failed","Validation failed",
-"ERROR: ","ERROR: ",
-"Item has empty mapping","Item has empty mapping",
-"Item is mapped to a directory in the source pack","Item is mapped to a directory in the source pack",
-"Item has duplicate mapping","Item has duplicate mapping",
-"Folder is empty","Folder is empty",
-"Output to Directory","Output to Directory",
-"Create New Patch PCK","Create New Patch PCK",
-"Patch PCK Directly","Patch PCK Directly",
-"Failed to load project:\n","Failed to load project:\n",
-"Failed to load import files:\n","Failed to load import files:\n",
-"Invalid CSV file:\n","Invalid CSV file:\n",
-"The CSV file has a different number of messages than the translation file.\n","The CSV file has a different number of messages than the translation file.\n",
-"CSV file keys = %d\n","CSV file keys = %d\n",
-"Translation messages = %d\n","Translation messages = %d\n",
-"The resulting patched translation file may be corrupted!\n","The resulting patched translation file may be corrupted!\n",
-"Please ensure that the correct translation is selected and the CSV file is up to date.","Please ensure that the correct translation is selected and the CSV file is up to date.",
-"Warning","Warning",
-"Please add at least one translation","Please add at least one translation",
-"Failed to patch translation ","Failed to patch translation ",
-"Failed to patch project config:\n","Failed to patch project config:\n",
-"Translation patched successfully","Translation patched successfully",
-"Failed to add files to patch PCK:\n","Failed to add files to patch PCK:\n",
-"Failed to finish patch PCK:\n","Failed to finish patch PCK:\n",
-"Patch PCK created successfully","Patch PCK created successfully",
-"Please load a project first","Please load a project first",
-"Please select a translation","Please select a translation",
-"Please select a CSV file","Please select a CSV file",
-"Please select at least one locale","Please select at least one locale",
-"CSV Path","CSV Path",
-"Certain assets have been written to the .assets directory!","Certain assets have been written to the .assets directory!",
-" (Steam Mono edition)"," (Steam Mono edition)",
-" (Steam edition)"," (Steam edition)",
+"Decompile .GDC/.GDE script files...","Decompile .GDC/.GDE script files...","反编译 .GDC/.GDE 脚本文件..."
+"Compile .GD script files...","Compile .GD script files...","编译 .GD 脚本文件..."
+"Resources","Resources","资源"
+"Convert binary resources to text...","Convert binary resources to text...","将二进制资源转换为文本..."
+"Convert text resources to binary...","Convert text resources to binary...","将文本资源转换为二进制..."
+"Convert stream textures to PNG...","Convert stream textures to PNG...","将流式纹理转换为 PNG..."
+"Convert OGG Samples to OGG...","Convert OGG Samples to OGG...","将 OGG 采样转换为 OGG..."
+"Convert WAV Samples to WAV...","Convert WAV Samples to WAV...","将 WAV 采样转换为 WAV..."
+"Export Resource...","Export Resource...","导出资源..."
+"Invalid bytecode version!","Invalid bytecode version!","无效的字节码版本！"
+"Decompiling files...","Decompiling files...","正在反编译文件..."
+"decompiling","decompiling","反编译中"
+"At least one error was detected!","At least one error was detected!","检测到至少一个错误！"
+"No errors detected.","No errors detected.","未检测到错误。"
+"The operation completed successfully!","The operation completed successfully!","操作成功完成！"
+"Compiling files...","Compiling files...","正在编译文件..."
+"compiling","compiling","编译中"
+"Error opening encrypted PCK file: ","Error opening encrypted PCK file: ","打开加密 PCK 文件出错： "
+"Read PCK","Read PCK","读取 PCK"
+"Error opening PCK file: ","Error opening PCK file: ","打开 PCK 文件出错： "
+"Total files: ","Total files: ","文件总数： "
+"Checked: ","Checked: ","已检查： "
+"Broken: ","Broken: ","损坏： "
+"Recovery report","Recovery report","恢复报告"
+"Extract report","Extract report","提取报告"
+"Converting files...","Converting files...","正在转换文件..."
+"Convert WAV samples","Convert WAV samples","转换 WAV 采样"
+"Convert OGG samples","Convert OGG samples","转换 OGG 采样"
+"Convert textures","Convert textures","转换纹理"
+"Convert resources","Convert resources","转换资源"
+"No exporters found for resource ","No exporters found for resource ","未找到资源的导出器： "
+"Exporting resources...","Exporting resources...","正在导出资源..."
+"Export resources","Export resources","导出资源"
+"Error opening folder (or empty folder): ","Error opening folder (or empty folder): ","打开文件夹出错（或文件夹为空）： "
+"New PCK","New PCK","新建 PCK"
+"%d replaced.","%d replaced.","已替换 %d 处。"
+"No matches","No matches","无匹配结果"
+"%s Mipmaps","%s Mipmaps","%s Mipmaps"
+"Memory: %s","Memory: %s","内存： %s"
+"No Mipmaps","No Mipmaps","无 Mipmaps"
+"Failed to create decompiler for version: ","Failed to create decompiler for version: ","为该版本创建反编译器失败： "
+"Decompiler Error","Decompiler Error","反编译器错误"
+"Error","Error","错误"
+"Failed to read file: ","Failed to read file: ","读取文件失败： "
+"File Error","File Error","文件错误"
+"Failed to compile file: ","Failed to compile file: ","编译文件失败： "
+"Compile Error","Compile Error","编译错误"
+"Failed to open file for writing: ","Failed to open file for writing: ","打开文件供写入失败： "
+"The following files were successfully compiled: ","The following files were successfully compiled: ","以下文件已成功编译： "
+"Compile Complete","Compile Complete","编译完成"
+"Failed to decompile file: ","Failed to decompile file: ","反编译文件失败： "
+"Decompile Error","Decompile Error","反编译错误"
+"The following files were successfully decompiled: ","The following files were successfully decompiled: ","以下文件已成功反编译： "
+"Decompile Complete","Decompile Complete","反编译完成"
+"ERROR: Failed to get bytecode buffer for encrypted file (did you set the encryption key?)","ERROR: Failed to get bytecode buffer for encrypted file (did you set the encryption key?)","错误：获取加密文件的字节码缓冲区失败（是否设置了加密密钥？）"
+"ERROR: Failed to open file: ","ERROR: Failed to open file: ","错误：打开文件失败： "
+"WARNING: Failed to create decompiler for revision: ","WARNING: Failed to create decompiler for revision: ","警告：为该修订版创建反编译器失败： "
+"WARNING: bytecode test failed for file: ","WARNING: bytecode test failed for file: ","警告：文件字节码测试失败： "
+"Invalid GDScript bytecode file: ","Invalid GDScript bytecode file: ","无效的 GDScript 字节码文件： "
+"No bytecode versions found","No bytecode versions found","未找到字节码版本"
+"Multiple bytecode versions found: ","Multiple bytecode versions found: ","找到多个字节码版本： "
+"Select a file and bytecode version to see the decompiled code","Select a file and bytecode version to see the decompiled code","选择文件和字节码版本以查看反编译后的代码"
+"Select a bytecode version to see the decompiled code","Select a bytecode version to see the decompiled code","选择字节码版本以查看反编译后的代码"
+"Select a file to see the decompiled code","Select a file to see the decompiled code","选择文件以查看反编译后的代码"
+"Hide Preview","Hide Preview","隐藏预览"
+"Show Preview...","Show Preview...","显示预览..."
+"--- Please select bytecode version ---","--- Please select bytecode version ---","--- 请选择字节码版本 ---"
+"Directory is not selected","Directory is not selected","未选择目录"
+"Embed source is empty","Embed source is empty","内嵌源为空"
+"ERROR:","ERROR:","错误："
+"*.exe,*.bin,*.32,*.64;Self contained executable files","*.exe,*.bin,*.32,*.64;Self contained executable files","*.exe,*.bin,*.32,*.64;自包含可执行文件"
+"*.pck;PCK files","*.pck;PCK files","*.pck;PCK 文件"
+"Directory Structure","Directory Structure","目录结构"
+"Export Scenes as","Export Scenes as","场景导出为"
+"Export Meshes as","Export Meshes as","网格导出为"
+"Flat","Flat","平铺"
+"Relative Hierarchical","Relative Hierarchical","相对层级"
+"Absolute Hierarchical","Absolute Hierarchical","绝对层级"
+"Auto","Auto","自动"
+"Failed to convert project config: ","Failed to convert project config: ","转换项目配置失败： "
+"Failed to export resource: ","Failed to export resource: ","导出资源失败： "
+"Exporting cancelled: ","Exporting cancelled: ","导出已取消： "
+"Failed to export file: ","Failed to export file: ","导出文件失败： "
+"Success","Success","成功"
+"Open Folder","Open Folder","打开文件夹"
+"Successfully exported resources","Successfully exported resources","资源导出成功"
+"Successfully extracted resources","Successfully extracted resources","资源提取成功"
+"Extract Selected...","Extract Selected...","提取所选..."
+"Export Selected...","Export Selected...","导出所选..."
+"Broken files: ","Broken files: ","损坏文件： "
+"Malformed paths: ","Malformed paths: ","异常路径： "
+"Hide Resource Preview","Hide Resource Preview","隐藏资源预览"
+"Show Resource Preview...","Show Resource Preview...","显示资源预览..."
+"C# Assembly","C# Assembly","C# 程序集"
+"C# Assembly ⚠️","C# Assembly ⚠️","C# 程序集 ⚠️"
+"File is NativeAOT assembly, not supported by GDRE Tools","File is NativeAOT assembly, not supported by GDRE Tools","文件为 NativeAOT 程序集，GDRE Tools 不支持"
+"File is not a valid .NET IL assembly (corrupt?)","File is not a valid .NET IL assembly (corrupt?)","文件不是有效的 .NET IL 程序集（可能已损坏？）"
+"File does not exist","File does not exist","文件不存在"
+"Error: selected PCK(s) are already loaded","Error: selected PCK(s) are already loaded","错误：所选 PCK 已被加载"
+"Error: failed to open ","Error: failed to open ","错误：无法打开 "
+"Load a pack first!","Load a pack first!","请先加载一个包！"
+"You can only patch one PCK at a time","You can only patch one PCK at a time","每次只能修补一个 PCK"
+"File","File","文件"
+"Mapping","Mapping","映射"
+"Map to Folder...","Map to Folder...","映射到文件夹..."
+"Error: You can only use this to patch PCKs or embedded PCKs","Error: You can only use this to patch PCKs or embedded PCKs","错误：此功能只能用于修补 PCK 或内嵌 PCK"
+"*.exe,*.bin,*.32,*.64,*.arm64,*.arm32;Self contained executable files","*.exe,*.bin,*.32,*.64,*.arm64,*.arm32;Self contained executable files","*.exe,*.bin,*.32,*.64,*.arm64,*.arm32;自包含可执行文件"
+"Validation failed","Validation failed","校验失败"
+"ERROR: ","ERROR: ","错误： "
+"Item has empty mapping","Item has empty mapping","条目映射为空"
+"Item is mapped to a directory in the source pack","Item is mapped to a directory in the source pack","条目映射到了源包中的目录"
+"Item has duplicate mapping","Item has duplicate mapping","条目存在重复映射"
+"Folder is empty","Folder is empty","文件夹为空"
+"Output to Directory","Output to Directory","输出到目录"
+"Create New Patch PCK","Create New Patch PCK","创建新补丁 PCK"
+"Patch PCK Directly","Patch PCK Directly","直接修补 PCK"
+"Failed to load project:\n","Failed to load project:\n","加载项目失败：\n"
+"Failed to load import files:\n","Failed to load import files:\n","加载导入文件失败：\n"
+"Invalid CSV file:\n","Invalid CSV file:\n","无效的 CSV 文件：\n"
+"The CSV file has a different number of messages than the translation file.\n","The CSV file has a different number of messages than the translation file.\n","CSV 文件的消息数量与翻译文件不一致。\n"
+"CSV file keys = %d\n","CSV file keys = %d\n","CSV 文件键数 = %d\n"
+"Translation messages = %d\n","Translation messages = %d\n","翻译消息数 = %d\n"
+"The resulting patched translation file may be corrupted!\n","The resulting patched translation file may be corrupted!\n","生成的补丁翻译文件可能已损坏！\n"
+"Please ensure that the correct translation is selected and the CSV file is up to date.","Please ensure that the correct translation is selected and the CSV file is up to date.","请确保已选择正确的翻译，且 CSV 文件为最新版本。"
+"Warning","Warning","警告"
+"Please add at least one translation","Please add at least one translation","请至少添加一个翻译"
+"Failed to patch translation ","Failed to patch translation ","修补翻译失败： "
+"Failed to patch project config:\n","Failed to patch project config:\n","修补项目配置失败：\n"
+"Translation patched successfully","Translation patched successfully","翻译修补成功"
+"Failed to add files to patch PCK:\n","Failed to add files to patch PCK:\n","向补丁 PCK 添加文件失败：\n"
+"Failed to finish patch PCK:\n","Failed to finish patch PCK:\n","完成补丁 PCK 失败：\n"
+"Patch PCK created successfully","Patch PCK created successfully","补丁 PCK 创建成功"
+"Please load a project first","Please load a project first","请先加载项目"
+"Please select a translation","Please select a translation","请选择一个翻译"
+"Please select a CSV file","Please select a CSV file","请选择 CSV 文件"
+"Please select at least one locale","Please select at least one locale","请至少选择一个语言区域"
+"CSV Path","CSV Path","CSV 路径"
+"Certain assets have been written to the .assets directory!","Certain assets have been written to the .assets directory!","部分资源已写入 .assets 目录！"
+" (Steam Mono edition)"," (Steam Mono edition)"," (Steam Mono 版)"
+" (Steam edition)"," (Steam edition)"," (Steam 版)"
 " (Mono)"," (Mono)",
-"[b]This Project requires a Godot engine built with double precision.[/b]\n","[b]This Project requires a Godot engine built with double precision.[/b]\n",
-"You must build the engine with `precision=double` flag to edit this project.\n","You must build the engine with `precision=double` flag to edit this project.\n",
-"[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]See the Godot documentation[/url] for more information.\n","[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]See the Godot documentation[/url] for more information.\n",
-"[b]Custom Godot engine version detected!\nYou may encounter errors when opening the project in the editor.[/b]\n","[b]Custom Godot engine version detected!\nYou may encounter errors when opening the project in the editor.[/b]\n",
-"Download URL:","Download URL:",
-"Open download URL","Open download URL",
-"Select File...","Select File...",
-"Select Directory...","Select Directory...",
-"Seperate items with a semicolon (;).","Seperate items with a semicolon (;).",
-"General","General",
-"WAV\nSample Rate: %d Hz\nChannels: %d\nFormat: %s\nLoop Mode: %s","WAV\nSample Rate: %d Hz\nChannels: %d\nFormat: %s\nLoop Mode: %s",
-"Disabled","Disabled",
-"Forward","Forward",
+"[b]This Project requires a Godot engine built with double precision.[/b]\n","[b]This Project requires a Godot engine built with double precision.[/b]\n","[b]此项目需要使用双精度构建的 Godot 引擎。[/b]\n"
+"You must build the engine with `precision=double` flag to edit this project.\n","You must build the engine with `precision=double` flag to edit this project.\n","必须使用 `precision=double` 标志构建引擎才能编辑此项目。\n"
+"[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]See the Godot documentation[/url] for more information.\n","[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]See the Godot documentation[/url] for more information.\n","[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]详见 Godot 文档[/url]。\n"
+"[b]Custom Godot engine version detected!\nYou may encounter errors when opening the project in the editor.[/b]\n","[b]Custom Godot engine version detected!\nYou may encounter errors when opening the project in the editor.[/b]\n","[b]检测到自定义 Godot 引擎版本！\n在编辑器中打开此项目时可能遇到错误。[/b]\n"
+"Download URL:","Download URL:","下载链接："
+"Open download URL","Open download URL","打开下载链接"
+"Select File...","Select File...","选择文件..."
+"Select Directory...","Select Directory...","选择目录..."
+"Seperate items with a semicolon (;).","Seperate items with a semicolon (;).","多个条目之间用分号 (;) 分隔。"
+"General","General","常规"
+"WAV\nSample Rate: %d Hz\nChannels: %d\nFormat: %s\nLoop Mode: %s","WAV\nSample Rate: %d Hz\nChannels: %d\nFormat: %s\nLoop Mode: %s","WAV\n采样率： %d Hz\n声道数： %d\n格式： %s\n循环模式： %s"
+"Disabled","Disabled","禁用"
+"Forward","Forward","正向"
 "PingPong","PingPong",
-"Backward","Backward",
+"Backward","Backward","反向"
 "PCM 8-bit","PCM 8-bit",
 "PCM 16-bit","PCM 16-bit",
 "ADPCM","ADPCM",
 "Quite OK","Quite OK",
-"Unknown","Unknown",
-"Loop Begin: ","Loop Begin: ",
-"Loop End: ","Loop End: ",
+"Unknown","Unknown","未知"
+"Loop Begin: ","Loop Begin: ","循环起点： "
+"Loop End: ","Loop End: ","循环终点： "
 "Ogg Vorbis","Ogg Vorbis",
-"Sample Rate: ","Sample Rate: ",
+"Sample Rate: ","Sample Rate: ","采样率： "
 "MP3","MP3",
-"BPM: ","BPM: ",
-"Bar Beats: ","Bar Beats: ",
-"Beat Count: ","Beat Count: ",
-"Loop: Yes","Loop: Yes",
-"Loop: No","Loop: No",
-"Loop Offset: ","Loop Offset: ",
+"BPM: ","BPM: ","BPM： "
+"Bar Beats: ","Bar Beats: ","每小节拍数： "
+"Beat Count: ","Beat Count: ","拍数： "
+"Loop: Yes","Loop: Yes","循环： 是"
+"Loop: No","Loop: No","循环： 否"
+"Loop Offset: ","Loop Offset: ","循环偏移： "
 "--:-- / --:--","--:-- / --:--",
-"[b]Path:[/b] %s\n[b]Type:[/b] %s\n[b]Format:[/b] %s","[b]Path:[/b] %s\n[b]Type:[/b] %s\n[b]Format:[/b] %s",
-"Switch to Scene View","Switch to Scene View",
-"Switch to Mesh View","Switch to Mesh View",
-"Switch to Text View","Switch to Text View",
-"[b]Engine Version:[/b] ","[b]Engine Version:[/b] ",
-"[b]Source Files:[/b] [","[b]Source Files:[/b] [",
-"[b]Source File:[/b] ","[b]Source File:[/b] ",
-"[b]Importer:[/b] ","[b]Importer:[/b] ",
-"[b]Import Options:[/b] {","[b]Import Options:[/b] {",
-"[b]Import Options:[/b] {}","[b]Import Options:[/b] {}",
-"[b]Path:[/b] ","[b]Path:[/b] ",
-"Error opening resource:\n","Error opening resource:\n",
-"Not a supported resource","Not a supported resource",
-"Show Tabs","Show Tabs",
-"Show Spaces","Show Spaces",
-"Word Wrap","Word Wrap",
-"Zoom In","Zoom In",
-"Zoom Out","Zoom Out",
-"Find...","Find...",
-"Replace...","Replace...",
-"Find Next","Find Next",
-"Find Previous","Find Previous",
-"Error loading script:\n","Error loading script:\n",
-"Error loading script:\nNo .NET assembly loaded","Error loading script:\nNo .NET assembly loaded",
-" <TRUNCATED...>"," <TRUNCATED...>",
-"File Name","File Name",
-"Copy path","Copy path",
-"Copy paths","Copy paths",
-"Check ","Check ",
-"Uncheck ","Uncheck ",
-"Fold all","Fold all",
-"Unfold all","Unfold all",
-"Error creating PCK file!","Error creating PCK file!",
-"Recovery canceled!","Recovery canceled!",
-"Cancelled","Cancelled",
-"Could not recover files:\n","Could not recover files:\n",
-"Could not extract files:\n","Could not extract files:\n",
-"Log file written to ","Log file written to ",
-"Please include this file when reporting an issue!","Please include this file when reporting an issue!",
-"Total files extracted: ","Total files extracted: ",
-"Encryption error detected, failed to extract one or more files.\nPlease check your encryption key and try again.\n","Encryption error detected, failed to extract one or more files.\nPlease check your encryption key and try again.\n",
-"Incorrect encryption key. Please set the correct key and try again.","Incorrect encryption key. Please set the correct key and try again.",
-"Failed to open ","Failed to open ",
-"Invalid Selection!!","Invalid Selection!!",
-"*.exe,*.bin,*.32,*.64,*.x86_64,*.x86,*.arm64,*.universal,*.zip,*.pck,*.apk,*.xapk,*.app;Supported files","*.exe,*.bin,*.32,*.64,*.x86_64,*.x86,*.arm64,*.universal,*.zip,*.pck,*.apk,*.xapk,*.app;Supported files",
-"Failed to convert files:\n","Failed to convert files:\n",
-"Invalid encryption script!\n","Invalid encryption script!\n",
-"Invalid key!\nKey must be a hex string with ","Invalid key!\nKey must be a hex string with ",
-"Update available! Click here! ","Update available! Click here! ",
-"No PCK files found, cannot patch","No PCK files found, cannot patch",
-"Multiple PCK files found, cannot patch","Multiple PCK files found, cannot patch",
-"Failed to add files to PCK:\n","Failed to add files to PCK:\n",
-"Failed to remove existing PCK:\n","Failed to remove existing PCK:\n",
-"Failed to write PCK:\n","Failed to write PCK:\n",
-"PCK patching complete","PCK patching complete",
-"Failed to load project config file","Failed to load project config file",
+"[b]Path:[/b] %s\n[b]Type:[/b] %s\n[b]Format:[/b] %s","[b]Path:[/b] %s\n[b]Type:[/b] %s\n[b]Format:[/b] %s","[b]路径：[/b] %s\n[b]类型：[/b] %s\n[b]格式：[/b] %s"
+"Switch to Scene View","Switch to Scene View","切换到场景视图"
+"Switch to Mesh View","Switch to Mesh View","切换到网格视图"
+"Switch to Text View","Switch to Text View","切换到文本视图"
+"[b]Engine Version:[/b] ","[b]Engine Version:[/b] ","[b]引擎版本：[/b] "
+"[b]Source Files:[/b] [","[b]Source Files:[/b] [","[b]源文件：[/b] ["
+"[b]Source File:[/b] ","[b]Source File:[/b] ","[b]源文件：[/b] "
+"[b]Importer:[/b] ","[b]Importer:[/b] ","[b]导入器：[/b] "
+"[b]Import Options:[/b] {","[b]Import Options:[/b] {","[b]导入选项：[/b] {"
+"[b]Import Options:[/b] {}","[b]Import Options:[/b] {}","[b]导入选项：[/b] {}"
+"[b]Path:[/b] ","[b]Path:[/b] ","[b]路径：[/b] "
+"Error opening resource:\n","Error opening resource:\n","打开资源出错：\n"
+"Not a supported resource","Not a supported resource","不受支持的资源"
+"Show Tabs","Show Tabs","显示制表符"
+"Show Spaces","Show Spaces","显示空格"
+"Word Wrap","Word Wrap","自动换行"
+"Zoom In","Zoom In","放大"
+"Zoom Out","Zoom Out","缩小"
+"Find...","Find...","查找..."
+"Replace...","Replace...","替换..."
+"Find Next","Find Next","查找下一个"
+"Find Previous","Find Previous","查找上一个"
+"Error loading script:\n","Error loading script:\n","加载脚本出错：\n"
+"Error loading script:\nNo .NET assembly loaded","Error loading script:\nNo .NET assembly loaded","加载脚本出错：\n未加载 .NET 程序集"
+" <TRUNCATED...>"," <TRUNCATED...>"," <已截断...>"
+"File Name","File Name","文件名"
+"Copy path","Copy path","复制路径"
+"Copy paths","Copy paths","复制所有路径"
+"Check ","Check ","勾选 "
+"Uncheck ","Uncheck ","取消勾选 "
+"Fold all","Fold all","全部折叠"
+"Unfold all","Unfold all","全部展开"
+"Error creating PCK file!","Error creating PCK file!","创建 PCK 文件出错！"
+"Recovery canceled!","Recovery canceled!","恢复已取消！"
+"Cancelled","Cancelled","已取消"
+"Could not recover files:\n","Could not recover files:\n","无法恢复文件：\n"
+"Could not extract files:\n","Could not extract files:\n","无法提取文件：\n"
+"Log file written to ","Log file written to ","日志文件已写入 "
+"Please include this file when reporting an issue!","Please include this file when reporting an issue!","报告问题时请附上此文件！"
+"Total files extracted: ","Total files extracted: ","已提取文件总数： "
+"Encryption error detected, failed to extract one or more files.\nPlease check your encryption key and try again.\n","Encryption error detected, failed to extract one or more files.\nPlease check your encryption key and try again.\n","检测到加密错误，一个或多个文件提取失败。\n请检查加密密钥后重试。\n"
+"Incorrect encryption key. Please set the correct key and try again.","Incorrect encryption key. Please set the correct key and try again.","加密密钥不正确。请设置正确的密钥后重试。"
+"Failed to open ","Failed to open ","无法打开 "
+"Invalid Selection!!","Invalid Selection!!","无效的选择！！"
+"*.exe,*.bin,*.32,*.64,*.x86_64,*.x86,*.arm64,*.universal,*.zip,*.pck,*.apk,*.xapk,*.app;Supported files","*.exe,*.bin,*.32,*.64,*.x86_64,*.x86,*.arm64,*.universal,*.zip,*.pck,*.apk,*.xapk,*.app;Supported files","*.exe,*.bin,*.32,*.64,*.x86_64,*.x86,*.arm64,*.universal,*.zip,*.pck,*.apk,*.xapk,*.app;受支持的文件"
+"Failed to convert files:\n","Failed to convert files:\n","转换文件失败：\n"
+"Invalid encryption script!\n","Invalid encryption script!\n","无效的加密脚本！\n"
+"Invalid key!\nKey must be a hex string with ","Invalid key!\nKey must be a hex string with ","无效的密钥！\n密钥必须是十六进制字符串，长度为 "
+" characters"," characters"," 个字符"
+"Update available! Click here! ","Update available! Click here! ","有可用更新！点击这里！ "
+"No PCK files found, cannot patch","No PCK files found, cannot patch","未找到 PCK 文件，无法修补"
+"Multiple PCK files found, cannot patch","Multiple PCK files found, cannot patch","找到多个 PCK 文件，无法修补"
+"Failed to add files to PCK:\n","Failed to add files to PCK:\n","向 PCK 添加文件失败：\n"
+"Failed to remove existing PCK:\n","Failed to remove existing PCK:\n","移除现有 PCK 失败：\n"
+"Failed to write PCK:\n","Failed to write PCK:\n","写入 PCK 失败：\n"
+"PCK patching complete","PCK patching complete","PCK 修补完成"
+"Failed to load project config file","Failed to load project config file","加载项目配置文件失败"
