@@ -1,5 +1,7 @@
 # Godot RE Tools
 
+English | [简体中文](README.zh-CN.md)
+
 ## Introduction
 
 ![Code Screenshot](images/screenshot.png)
