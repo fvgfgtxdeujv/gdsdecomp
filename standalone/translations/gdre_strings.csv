@@ -259,6 +259,7 @@ keys,en,zh_CN
 "Recovery canceled!","Recovery canceled!",
 "Cancelled","Cancelled",
 "Could not recover files:\n","Could not recover files:\n",
+"Could not extract files:\n","Could not extract files:\n",
 "Log file written to ","Log file written to ",
 "Please include this file when reporting an issue!","Please include this file when reporting an issue!",
 "Total files extracted: ","Total files extracted: ",
