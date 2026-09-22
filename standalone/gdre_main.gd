@@ -567,10 +567,10 @@ func _process(_delta):
 	pass
 
 func _init_locale() -> void:
-	# Follow the system UI language. Locales without a bundled translation
-	# transparently fall back to the English source strings, which also
-	# serve as the translation keys.
-	TranslationServer.set_locale(OS.get_locale_language())
+	# Follow the system UI locale (e.g. zh_CN, en_US). Locales without a
+	# bundled translation transparently fall back to the English source
+	# strings, which also serve as the translation keys.
+	TranslationServer.set_locale(OS.get_locale())
 
 func _ready():
 	_init_locale()
