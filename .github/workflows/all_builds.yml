@@ -2,6 +2,17 @@
 name: Build Editor and Standalone
 on:
   workflow_dispatch:
+    inputs:
+      platform:
+        description: "Platform to build (only applies to manual runs; push/PR always build all)"
+        type: choice
+        default: windows
+        options:
+          - windows
+          - linux
+          - android
+          - macos
+          - all
   push:
   pull_request:
 
@@ -21,103 +32,90 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Generates the per-platform matrix for build/test/export based on the
+  # workflow_dispatch `platform` input. push/PR always run everything.
+  # Why a generator job: GitHub Actions matrix `include` entries do not
+  # support entry-level `if`, so to actually skip a platform's job
+  # instances (and not just run them as no-ops on a paid runner) we must
+  # build the include list dynamically and consume it via fromJSON.
+  # Note the cross-dependency: exporting the Android apk uses the Linux
+  # editor binary, so selecting "android" still builds linux-editor.
+  gen-matrix:
+    name: Generate matrix
+    runs-on: ubuntu-latest
+    outputs:
+      build-matrix: ${{ steps.gen.outputs.build-matrix }}
+      test-matrix: ${{ steps.gen.outputs.test-matrix }}
+      export-matrix: ${{ steps.gen.outputs.export-matrix }}
+    steps:
+      - id: gen
+        shell: python
+        env:
+          PLATFORM_INPUT: ${{ inputs.platform }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          import json, os
+          sel = os.environ.get("PLATFORM_INPUT") or "all"
+          if os.environ.get("EVENT_NAME") != "workflow_dispatch":
+              sel = "all"
+
+          build_all = [
+            {"name": "Windows Editor", "os": "windows-latest", "id": "windows-editor", "platform": "windows", "target": "editor", "sconsflags": "debug_symbols=no tests=yes", "rust-arch": "x86_64-pc-windows-msvc", "alt-rust-arch": "none", "bin": "./bin/godot.windows.editor.x86_64.exe"},
+            {"name": "Windows Template Release", "os": "windows-latest", "id": "windows-template", "platform": "windows", "target": "template_release", "sconsflags": "debug_symbols=no production=yes", "rust-arch": "x86_64-pc-windows-msvc", "alt-rust-arch": "none", "bin": "./bin/godot.windows.editor.x86_64.exe"},
+            {"name": "🐧 Linux Editor", "os": "ubuntu-22.04", "id": "linux-editor", "platform": "linux", "target": "editor", "sconsflags": "debug_symbols=no tests=yes", "rust-arch": "x86_64-unknown-linux-gnu", "alt-rust-arch": "none", "bin": "./bin/godot.linuxbsd.editor.x86_64"},
+            {"name": "🐧 Linux Template Debug", "os": "ubuntu-22.04", "id": "linux-template-debug", "platform": "linux", "target": "template_debug", "sconsflags": "debug_symbols=no tests=yes production=yes", "rust-arch": "x86_64-unknown-linux-gnu", "alt-rust-arch": "none", "bin": "./bin/godot.linuxbsd.template_debug.x86_64"},
+            {"name": "🐧 Linux Template Release", "os": "ubuntu-22.04", "id": "linux-template", "platform": "linux", "target": "template_release", "rust-arch": "x86_64-unknown-linux-gnu", "alt-rust-arch": "none", "sconsflags": "production=yes debug_symbols=no optimize=size use_lto=yes", "bin": "./bin/godot.linuxbsd.editor.x86_64"},
+            {"name": "🤖 Android Template Release", "os": "ubuntu-22.04", "id": "android-template", "platform": "android", "target": "template_release", "rust-arch": "x86_64-linux-android", "alt-rust-arch": "aarch64-linux-android", "sconsflags": "production=yes debug_symbols=no optimize=size use_lto=yes generate_android_binaries=yes", "bin": "./bin/godot.linuxbsd.editor.x86_64"},
+            {"name": "🍎 macOS Editor", "os": "macos-26", "id": "macos-editor", "platform": "macos", "target": "editor", "rust-arch": "x86_64-apple-darwin", "alt-rust-arch": "none", "sconsflags": "debug_symbols=no tests=yes use_volk=no vulkan=yes", "bin": "./bin/godot.macos.editor.arm64"},
+            {"name": "🍎 macOS Template Release", "os": "macos-26", "id": "macos-template", "platform": "macos", "target": "template_release", "rust-arch": "x86_64-apple-darwin", "alt-rust-arch": "aarch64-apple-darwin", "sconsflags": "production=yes debug_symbols=no optimize=size use_lto=yes use_volk=no vulkan=yes", "bin": "./bin/godot.macos.editor.arm64"},
+          ]
+          test_all = [
+            {"name": "Windows", "os": "windows-latest", "id": "windows", "target": "editor", "platform": "windows", "bin": "./bin/godot.windows.editor.x86_64.exe"},
+            {"name": "🐧 Linux Editor", "os": "ubuntu-24.04", "id": "linux-editor", "target": "editor", "platform": "linux", "bin": "./bin/godot.linuxbsd.editor.x86_64"},
+            {"name": "🐧 Linux Template Debug", "os": "ubuntu-24.04", "id": "linux-template-debug", "target": "template_debug", "platform": "linux", "bin": "./bin/godot.linuxbsd.template_debug.x86_64"},
+            {"name": "🍎 macOS", "os": "macos-latest", "id": "macos", "target": "editor", "platform": "macos", "bin": "./bin/godot.macos.editor.arm64"},
+          ]
+          export_all = [
+            {"name": "Windows", "os": "windows-latest", "id": "windows", "editor": "windows", "platform": "windows", "command-export": r"${env:GITHUB_WORKSPACE}\bin\godot.windows.editor.x86_64.exe", "export-preset": "Windows Desktop", "export-name": r".export\gdre_tools.exe", "debug": False},
+            {"name": "🐧 Linux", "os": "ubuntu-24.04", "id": "linux", "editor": "linux", "platform": "linux", "command-export": "${env:GITHUB_WORKSPACE}/bin/godot.linuxbsd.editor.x86_64", "export-preset": "Linux/X11", "export-name": ".export/gdre_tools.x86_64", "debug": False},
+            {"name": "🤖 Android", "os": "ubuntu-24.04", "id": "android", "editor": "linux", "platform": "android", "command-export": "${env:GITHUB_WORKSPACE}/bin/godot.linuxbsd.editor.x86_64", "export-preset": "Android", "export-name": ".export/gdre_tools.apk", "debug": False},
+            {"name": "🍎 macOS", "os": "macos-latest", "id": "macos", "editor": "macos", "platform": "macos", "command-export": "${env:GITHUB_WORKSPACE}/bin/godot.macos.editor.arm64", "export-preset": "macOS", "export-name": ".export/gdre_tools.universal.zip", "debug": False},
+          ]
+
+          # id whitelists per selection. "android" pulls in linux-editor
+          # because the Android apk is exported with the Linux editor.
+          selection = {
+              "windows": {"build": ["windows-editor", "windows-template"], "test": ["windows"], "export": ["windows"]},
+              "linux":   {"build": ["linux-editor", "linux-template-debug", "linux-template"], "test": ["linux-editor", "linux-template-debug"], "export": ["linux"]},
+              "android": {"build": ["linux-editor", "android-template"], "test": [], "export": ["android"]},
+              "macos":   {"build": ["macos-editor", "macos-template"], "test": ["macos"], "export": ["macos"]},
+          }
+
+          def pick(entries, ids):
+              return [e for e in entries if e["id"] in set(ids)]
+
+          if sel == "all":
+              build_sel, test_sel, export_sel = build_all, test_all, export_all
+          else:
+              m = selection[sel]
+              build_sel = pick(build_all, m["build"])
+              test_sel = pick(test_all, m["test"])
+              export_sel = pick(export_all, m["export"])
+
+          gho = os.environ["GITHUB_OUTPUT"]
+          with open(gho, "a", encoding="utf-8") as f:
+              f.write(f"build-matrix={json.dumps({'include': build_sel})}\n")
+              f.write(f"test-matrix={json.dumps({'include': test_sel})}\n")
+              f.write(f"export-matrix={json.dumps({'include': export_sel})}\n")
+
   build:
+    needs: gen-matrix
     # Windows 10 with latest image
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.name }}
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - name: "Windows Editor"
-            os: "windows-latest"
-            id: windows-editor
-            platform: windows
-            target: editor
-            sconsflags: debug_symbols=no tests=yes
-            rust-arch: x86_64-pc-windows-msvc
-            alt-rust-arch: none
-            bin: ./bin/godot.windows.editor.x86_64.exe
-
-          - name: "Windows Template Release"
-            os: "windows-latest"
-            id: windows-template
-            platform: windows
-            target: template_release
-            sconsflags: debug_symbols=no production=yes
-            rust-arch: x86_64-pc-windows-msvc
-            alt-rust-arch: none
-            bin: ./bin/godot.windows.editor.x86_64.exe
-
-          - name: "🐧 Linux Editor"
-            os: "ubuntu-22.04"
-            id: linux-editor
-            platform: linux
-            target: editor
-            sconsflags: debug_symbols=no tests=yes
-            rust-arch: x86_64-unknown-linux-gnu
-            alt-rust-arch: none
-            bin: ./bin/godot.linuxbsd.editor.x86_64
-
-          # TODO: move into its own workflow
-          # - name: "🐧 Linux Editor with sanitizers"
-          #   os: "ubuntu-24.04"
-          #   id: linux-sanitizers
-          #   platform: linux
-          #   target: editor
-          #   sconsflags: dev_build=yes debug_symbols=no tests=yes use_asan=yes use_ubsan=yes linker=gold
-          #   bin: ./bin/godot.linuxbsd.editor.x86_64.san
-
-          # For testing the template builds
-          - name: "🐧 Linux Template Debug"
-            os: "ubuntu-22.04"
-            id: linux-template-debug
-            platform: linux
-            target: template_debug
-            sconsflags: debug_symbols=no tests=yes production=yes
-            rust-arch: x86_64-unknown-linux-gnu
-            alt-rust-arch: none
-            bin: ./bin/godot.linuxbsd.template_debug.x86_64
-
-          - name: "🐧 Linux Template Release"
-            os: "ubuntu-22.04"
-            id: linux-template
-            platform: linux
-            target: template_release
-            rust-arch: x86_64-unknown-linux-gnu
-            alt-rust-arch: none
-            sconsflags: production=yes debug_symbols=no optimize=size use_lto=yes
-            bin: ./bin/godot.linuxbsd.editor.x86_64
-
-          - name: "🤖 Android Template Release"
-            os: "ubuntu-22.04"
-            id: android-template
-            platform: android
-            target: template_release
-            rust-arch: x86_64-linux-android
-            alt-rust-arch: aarch64-linux-android
-            sconsflags: production=yes debug_symbols=no optimize=size use_lto=yes generate_android_binaries=yes
-            bin: ./bin/godot.linuxbsd.editor.x86_64
-
-          - name: "🍎 macOS Editor"
-            os: "macos-26"
-            id: macos-editor
-            platform: macos
-            target: editor
-            rust-arch: x86_64-apple-darwin
-            alt-rust-arch: none
-            sconsflags: debug_symbols=no tests=yes use_volk=no vulkan=yes
-            bin: ./bin/godot.macos.editor.arm64
-
-          - name: "🍎 macOS Template Release"
-            os: "macos-26"
-            id: macos-template
-            platform: macos
-            target: template_release
-            rust-arch: x86_64-apple-darwin
-            alt-rust-arch: aarch64-apple-darwin
-            sconsflags: production=yes debug_symbols=no optimize=size use_lto=yes use_volk=no vulkan=yes
-            bin: ./bin/godot.macos.editor.arm64
+      matrix: ${{ fromJSON(needs.gen-matrix.outputs.build-matrix) }}
 
     steps:
       - name: Set git to use LF
@@ -147,7 +145,7 @@ jobs:
         id: restore-cache
         with:
           cache-name: ${{ matrix.id }}-${{ matrix.target }}
-        continue-on-error: true
+          continue-on-error: true
 
       - name: Install Linux deps
         if: matrix.platform == 'linux' || matrix.platform == 'android'
@@ -310,37 +308,12 @@ jobs:
 
 
   test:
-    needs: build
+    needs: [gen-matrix, build]
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.name }} test
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - name: "Windows"
-            os: "windows-latest"
-            target: editor
-            platform: windows
-            bin: ./bin/godot.windows.editor.x86_64.exe
-
-          - name: "🐧 Linux Editor"
-            os: "ubuntu-24.04"
-            target: editor
-            platform: linux
-            bin: ./bin/godot.linuxbsd.editor.x86_64
-
-          - name: "🐧 Linux Template Debug"
-            os: "ubuntu-24.04"
-            target: template_debug
-            platform: linux
-            bin: ./bin/godot.linuxbsd.template_debug.x86_64
-
-          - name: "🍎 macOS"
-            os: "macos-latest"
-            target: editor
-            platform: macos
-            bin: ./bin/godot.macos.editor.arm64
-
+      matrix: ${{ fromJSON(needs.gen-matrix.outputs.test-matrix) }}
     steps:
       - name: checkout-godot
         uses: actions/checkout@v4
@@ -376,48 +349,12 @@ jobs:
         run: |
           ${{matrix.bin}} --headless --test --force-colors "--test-case=[GDSDecomp]*"
   export:
-    needs: build
+    needs: [gen-matrix, build]
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.name }} export
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - name: "Windows"
-            os: "windows-latest"
-            editor: windows
-            platform: windows
-            command-export: ${env:GITHUB_WORKSPACE}\bin\godot.windows.editor.x86_64.exe
-            export-preset: "Windows Desktop"
-            export-name: .export\gdre_tools.exe
-            debug: false
-
-          - name: "🐧 Linux"
-            os: "ubuntu-24.04"
-            editor: linux
-            platform: linux
-            command-export: ${env:GITHUB_WORKSPACE}/bin/godot.linuxbsd.editor.x86_64
-            export-preset: "Linux/X11"
-            export-name: .export/gdre_tools.x86_64
-            debug: false
-
-          - name: "🤖 Android"
-            os: "ubuntu-24.04"
-            editor: linux
-            platform: android
-            command-export: ${env:GITHUB_WORKSPACE}/bin/godot.linuxbsd.editor.x86_64
-            export-preset: "Android"
-            export-name: .export/gdre_tools.apk
-            debug: false
-
-          - name: "🍎 macOS"
-            os: "macos-latest"
-            editor: macos
-            platform: macos
-            command-export: ${env:GITHUB_WORKSPACE}/bin/godot.macos.editor.arm64
-            export-preset: "macOS"
-            export-name: .export/gdre_tools.universal.zip
-            debug: false
+      matrix: ${{ fromJSON(needs.gen-matrix.outputs.export-matrix) }}
     steps:
       - name: checkout-gdsdecomp
         uses: actions/checkout@v4
