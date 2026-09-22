@@ -3,25 +3,7 @@ name: Build Editor and Standalone
 on:
   workflow_dispatch:
   push:
-    paths:
-      - "**"
-      - "!**.md"
-      - "!LICENSE"
-      - "!.scripts/clang_format.sh"
-      - "!.github/**"
-      - "!.vscode/**"
-      - ".github/actions/**"
-      - ".github/workflows/all_builds.yml"
   pull_request:
-    paths:
-      - "**"
-      - "!**.md"
-      - "!LICENSE"
-      - "!.scripts/clang_format.sh"
-      - "!.github/**"
-      - "!.vscode/**"
-      - ".github/actions/**"
-      - ".github/workflows/all_builds.yml"
 
 # Global Settings
 # SCONS_CACHE for windows must be set in the build environment
