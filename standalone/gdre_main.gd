@@ -105,7 +105,7 @@ func _on_new_pck_selected(pck_path: String):
 	creator.encrypt = NEW_PCK_DIALOG.ENCRYPT.is_pressed()
 	var err = creator.pck_create(pck_path, directory, includes, excludes)
 	if (err):
-		popup_error_box("Error creating PCK file!", "Error")
+		popup_error_box(tr("Error creating PCK file!"), tr("Error"))
 		return
 
 
@@ -129,25 +129,25 @@ func extract_and_recover(files_to_extract: PackedStringArray, output_dir: String
 		GDRESettings.open_log_file(output_dir)
 	var log_path = GDRESettings.get_log_file_path()
 	GDRESettings.get_errors()
-	var report_str = "Log file written to " + log_path
-	report_str += "\nPlease include this file when reporting an issue!\n\n"
+	var report_str = tr("Log file written to ") + log_path
+	report_str += "\n" + tr("Please include this file when reporting an issue!") + "\n\n"
 	var pck_dumper = PckDumper.new()
 	var err = pck_dumper.pck_dump_to_dir(output_dir, files_to_extract)
 	if (err == ERR_SKIP):
-		popup_error_box("Recovery canceled!", "Cancelled")
+		popup_error_box(tr("Recovery canceled!"), tr("Cancelled"))
 		end_recovery()
 		return
 	if (err != OK):
-		var error_str = "Could not extract files:\n" + GDRESettings.get_recent_error_string()
+		var error_str = tr("Could not extract files:\n") + GDRESettings.get_recent_error_string()
 		if err == ERR_UNAUTHORIZED:
-			error_str = "Encryption error detected, failed to extract one or more files.\nPlease check your encryption key and try again.\n"
-		popup_error_box(error_str, "Error")
+			error_str = tr("Encryption error detected, failed to extract one or more files.\nPlease check your encryption key and try again.\n")
+		popup_error_box(error_str, tr("Error"))
 		end_recovery()
 		return
 	# check if ExtractOnly is pressed
 	if (extract_only):
-		report_str = "Total files extracted: " + String.num(files_to_extract.size()) + "\n"
-		popup_error_box(report_str, "Info")
+		report_str = tr("Total files extracted: ") + String.num(files_to_extract.size()) + "\n"
+		popup_error_box(report_str, tr("Info"))
 		end_recovery()
 		return
 	GDRESettings.get_errors()
@@ -155,11 +155,11 @@ func extract_and_recover(files_to_extract: PackedStringArray, output_dir: String
 	var import_exporter = ImportExporter.new()
 	err = import_exporter.export_imports(output_dir, files_to_extract)
 	if (err == ERR_SKIP):
-		popup_error_box("Recovery canceled!", "Cancelled")
+		popup_error_box(tr("Recovery canceled!"), tr("Cancelled"))
 		end_recovery()
 		return
 	if (err != OK):
-		popup_error_box("Could not recover files:\n" + GDRESettings.get_recent_error_string(), "Error")
+		popup_error_box(tr("Could not recover files:\n") + GDRESettings.get_recent_error_string(), tr("Error"))
 		end_recovery()
 		return
 	var report = import_exporter.get_report()
@@ -189,8 +189,8 @@ func launch_recovery_window(paths: PackedStringArray):
 	if err != OK:
 		var error_msg = GDRESettings.get_recent_error_string()
 		if error_msg.to_lower().contains("encrypt"):
-			error_msg = "Incorrect encryption key. Please set the correct key and try again."
-		popup_error_box("Failed to open " + str(GDRECommon.get_files_for_paths(paths)) + ":\n" + error_msg, "Error")
+			error_msg = tr("Incorrect encryption key. Please set the correct key and try again.")
+		popup_error_box(tr("Failed to open ") + str(GDRECommon.get_files_for_paths(paths)) + ":\n" + error_msg, tr("Error"))
 		return
 
 	RECOVERY_DIALOG.show_win()
@@ -212,7 +212,7 @@ func _on_recover_project_dir_selected(path):
 		GDREMainLoop.call_on_next_process(func(): launch_recovery_window([path]))
 	else:
 		# pop up an accept dialog
-		popup_error_box("Invalid Selection!!", "Error")
+		popup_error_box(tr("Invalid Selection!!"), tr("Error"))
 		return
 
 func open_subwindow(window: Window):
@@ -247,7 +247,7 @@ func setup_file_dialog():
 	_file_dialog.set_access(FileDialog.ACCESS_FILESYSTEM)
 	_file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILES #FileDialog.FILE_MODE_OPEN_FILE
 	#_file_dialog.filters = ["*"]
-	_file_dialog.filters = ["*.exe,*.bin,*.32,*.64,*.x86_64,*.x86,*.arm64,*.universal,*.zip,*.pck,*.apk,*.xapk,*.app;Supported files"]
+	_file_dialog.filters = [tr("*.exe,*.bin,*.32,*.64,*.x86_64,*.x86,*.arm64,*.universal,*.zip,*.pck,*.apk,*.xapk,*.app;Supported files")]
 	#_file_dialog.filters = ["*.exe,*.bin,*.32,*.64,*.x86_64,*.x86,*.arm64,*.universal;Self contained executable files", "*.pck;PCK files", "*.apk;APK files", "*;All files"]
 	## TODO: remove this
 	_file_dialog.current_dir = GDRESettings.get_home_dir()
@@ -364,7 +364,7 @@ func _on_bin_to_text_file_dialog_files_selected(paths: PackedStringArray) -> voi
 				errors.append(path)
 	if errors.size() > 0:
 		var error_str = String("\n").join(errors)
-		popup_error_box("Failed to convert files:\n" + error_str + "\n" + GDRESettings.get_recent_error_string(), "Error")
+		popup_error_box(tr("Failed to convert files:\n") + error_str + "\n" + GDRESettings.get_recent_error_string(), tr("Error"))
 
 
 func _on_text_to_bin_file_dialog_files_selected(paths: PackedStringArray) -> void:
@@ -384,7 +384,7 @@ func _on_text_to_bin_file_dialog_files_selected(paths: PackedStringArray) -> voi
 				errors.append(path)
 	if errors.size() > 0:
 		var error_str = String("\n").join(errors)
-		popup_error_box("Failed to convert files:\n" + error_str + "\n" + GDRESettings.get_recent_error_string(), "Error")
+		popup_error_box(tr("Failed to convert files:\n") + error_str + "\n" + GDRESettings.get_recent_error_string(), tr("Error"))
 
 
 func _do_export(paths, new_ext):
@@ -395,7 +395,7 @@ func _do_export(paths, new_ext):
 		if Exporter.export_file(new_path, path) != OK:
 			had_errors = true
 	if had_errors:
-		popup_error_box("Failed to convert files:\n" + GDRESettings.get_recent_error_string(), "Error")
+		popup_error_box(tr("Failed to convert files:\n") + GDRESettings.get_recent_error_string(), tr("Error"))
 
 
 func _on_texture_file_dialog_files_selected(paths: PackedStringArray) -> void:
@@ -442,7 +442,7 @@ func _on_setenc_key_ok_pressed():
 		GDRESettings.get_recent_error_string()
 		var err:int = GDRESettings.set_custom_decryption_script(%EncryptionScriptPathText.text)
 		if (err != OK):
-			$SetEncryptionKeyWindow.popup_error_box("Invalid encryption script!\n" + GDRESettings.get_recent_error_string(), "Error")
+			$SetEncryptionKeyWindow.popup_error_box(tr("Invalid encryption script!\n") + GDRESettings.get_recent_error_string(), tr("Error"))
 			return
 	else:
 		GDRESettings.reset_custom_decryptor()
@@ -455,7 +455,7 @@ func _on_setenc_key_ok_pressed():
 		if (err != OK):
 			keytextbox.text = ""
 			# pop up an accept dialog
-			$SetEncryptionKeyWindow.popup_error_box("Invalid key!\nKey must be a hex string with " + str(GDRESettings.get_required_key_size_in_bytes() * 2) + " characters", "Error")
+			$SetEncryptionKeyWindow.popup_error_box(tr("Invalid key!\nKey must be a hex string with ") + str(GDRESettings.get_required_key_size_in_bytes() * 2) + " characters", tr("Error"))
 			return
 
 	# close the window
@@ -512,7 +512,7 @@ func _on_version_check_completed(_result, response_code, _headers, body):
 	if draft or (prerelease and not ("-" in curr_version)) or not is_new_version(checked_version):
 		return
 
-	var update_str = "Update available! Click here! " + curr_version
+	var update_str = tr("Update available! Click here! ") + curr_version
 	repo_url = latest_release_url
 	$version_lbl.text = update_str
 	print("New version of GDRE available: " + checked_version)
@@ -1861,11 +1861,11 @@ func _on_gdre_patch_pck_do_patch_pck(dest_pck: String, file_map: Dictionary[Stri
 	var pack_infos = GDRESettings.get_pack_info_list()
 	if (pack_infos.is_empty()):
 		GDRESettings.unload_project()
-		popup_error_box("No PCK files found, cannot patch", "Error")
+		popup_error_box(tr("No PCK files found, cannot patch"), tr("Error"))
 		return
 	if (pack_infos.size() > 1):
 		GDRESettings.unload_project()
-		popup_error_box("Multiple PCK files found, cannot patch", "Error")
+		popup_error_box(tr("Multiple PCK files found, cannot patch"), tr("Error"))
 		return
 	var embed_pck = ""
 	if (pack_infos[0].get_type() == 4 and should_embed):
@@ -1874,7 +1874,7 @@ func _on_gdre_patch_pck_do_patch_pck(dest_pck: String, file_map: Dictionary[Stri
 	var err = pck_creator.add_files(file_map)
 	if (err != OK):
 		GDRESettings.unload_project()
-		popup_error_box("Failed to add files to PCK:\n" + pck_creator.get_error_message(), "Error")
+		popup_error_box(tr("Failed to add files to PCK:\n") + pck_creator.get_error_message(), tr("Error"))
 		return
 	err = pck_creator.finish_pck()
 	GDRESettings.unload_project()
@@ -1882,12 +1882,12 @@ func _on_gdre_patch_pck_do_patch_pck(dest_pck: String, file_map: Dictionary[Stri
 		var tmp_path = pck_creator.get_error_message()
 		err = DirAccess.remove_absolute(dest_pck)
 		if (err != OK):
-			popup_error_box("Failed to remove existing PCK:\n" + dest_pck, "Error")
+			popup_error_box(tr("Failed to remove existing PCK:\n") + dest_pck, tr("Error"))
 		err = DirAccess.rename_absolute(tmp_path, dest_pck)
 	if (err != OK):
-		popup_error_box("Failed to write PCK:\n" + pck_creator.get_error_message(), "Error")
+		popup_error_box(tr("Failed to write PCK:\n") + pck_creator.get_error_message(), tr("Error"))
 		return
-	popup_error_box("PCK patching complete", "Success")
+	popup_error_box(tr("PCK patching complete"), tr("Success"))
 	pass # Replace with function body.
 
 
