@@ -389,11 +389,37 @@ export/android/android_sdk_path = ""$android_home""
 
 $ErrorActionPreference = "Stop"
 
-echo "running: $export_command --headless -e --quit"
+echo "running: $export_command --headless --import"
+# --import (unlike "-e --quit") waits for every resource to finish importing
+# before exiting. This guarantees the CSV translation tables under
+# standalone/translations are compiled to .translation resources here, so
+# they are embedded in the exported exe/apk/linux binary instead of being
+# skipped when the asynchronous editor import is cut short.
 # Set-PSDebug -Trace 1
-$proc = Start-Process -NoNewWindow -PassThru -FilePath "$export_command" -ArgumentList '--headless -e --quit'
+$proc = Start-Process -NoNewWindow -PassThru -FilePath "$export_command" -ArgumentList '--headless --import'
 Wait-Process -Id $proc.id -Timeout 300
 # Set-PSDebug -Trace 0
+if ($proc.ExitCode -ne 0) {
+    cd $current_dir
+    $exit_code = $proc.ExitCode
+    echo "Resource import failed with exit code ""$exit_code"""
+    exit 1
+}
+
+# Confirm the compiled UI translation tables exist; they are referenced from
+# project.godot's [internationalization] section and therefore baked into the
+# export. Warn loudly (without aborting) if a CSV failed to import.
+$imported_dir = Join-Path $standaloneDir ".godot/imported"
+$translation_artifacts = Get-ChildItem $imported_dir -Filter "gdre_strings*.translation*" -ErrorAction SilentlyContinue
+if ($null -eq $translation_artifacts) {
+    echo "WARNING: no compiled gdre_strings.*.translation files found under .godot/imported after import."
+    echo "WARNING: the exported build may be missing the bundled UI translations."
+    echo "WARNING: check that standalone/translations/gdre_strings.csv imports without errors."
+}
+else {
+    echo "Compiled UI translation tables to be embedded in the export:"
+    $translation_artifacts | ForEach-Object { echo "  $($_.Name)" }
+}
 
 $export_flag = "--export-release"
 if ($debug) {
