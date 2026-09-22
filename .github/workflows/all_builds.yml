@@ -503,6 +503,20 @@ jobs:
           cd ${{github.workspace}}/modules/gdsdecomp/standalone
           pwsh -File ${{github.workspace}}/modules/gdsdecomp/.scripts/export.ps1 "${{ matrix.export-preset }}" -path "${{ matrix.export-name }}" $debug_flag
 
+      - name: Verify UI translations were compiled into the export
+        shell: bash
+        run: |
+          set -e
+          imported_dir="${{github.workspace}}/modules/gdsdecomp/standalone/.godot/imported"
+          if ! ls "$imported_dir"/gdre_strings*.translation* >/dev/null 2>&1; then
+            echo "::error::No compiled gdre_strings.*.translation files found under .godot/imported after export."
+            echo "::error::The UI translations were NOT embedded in the ${{ matrix.export-preset }} build."
+            echo "::error::Check that standalone/translations/gdre_strings.csv imports without errors."
+            exit 1
+          fi
+          echo "Compiled UI translation tables embedded in this export:"
+          ls "$imported_dir"/gdre_strings*.translation* | xargs -n1 basename
+
       - uses: actions/upload-artifact@v4
         with:
           name: GDRE_tools-standalone-${{ matrix.platform }}
