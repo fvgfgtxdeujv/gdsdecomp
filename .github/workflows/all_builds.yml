@@ -1,6 +1,7 @@
 # TODO: we should break this up into multiple workflows, there are too many steps that only run on certain platforms
 name: Build Editor and Standalone
 on:
+  workflow_dispatch:
   push:
     paths:
       - "**"
