@@ -566,7 +566,14 @@ func get_globs_files(globs: PackedStringArray) -> PackedStringArray:
 func _process(_delta):
 	pass
 
+func _init_locale() -> void:
+	# Follow the system UI language. Locales without a bundled translation
+	# transparently fall back to the English source strings, which also
+	# serve as the translation keys.
+	TranslationServer.set_locale(OS.get_locale_language())
+
 func _ready():
+	_init_locale()
 	$version_lbl.text = GDRESettings.get_gdre_version()
 	# If CLI arguments were passed in, just quit
 	var args = get_sanitized_args()
