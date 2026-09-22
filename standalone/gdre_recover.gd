@@ -53,7 +53,7 @@ func show_win():
 func extract_file(file: String, output_dir: String, dir_structure: DirStructure, rel_base: String) -> String:
 	var bytes = FileAccess.get_file_as_bytes(file)
 	if bytes.is_empty():
-		return "Failed to read file: " + file
+		return tr("Failed to read file: ") + file
 	else:
 		var file_path = get_output_file_name(file, output_dir, dir_structure, "", rel_base)
 		GDRECommon.ensure_dir(file_path.get_base_dir())
@@ -62,7 +62,7 @@ func extract_file(file: String, output_dir: String, dir_structure: DirStructure,
 			f.store_buffer(bytes)
 			f.close()
 		else:
-			return "Failed to open file for writing: " + file_path
+			return tr("Failed to open file for writing: ") + file_path
 	return ""
 
 
@@ -233,7 +233,7 @@ func _export_files(files: PackedStringArray, output_dir: String, dir_structure: 
 		if file.get_file() == "project.binary" || file.get_file() == "engine.cfb":
 			var ret = convert_pcfg_to_text(file, output_dir)
 			if ret[0] != OK:
-				errs.append("Failed to convert project config: " + file + "\n" + GDRESettings.get_recent_error_string())
+				errs.append(tr("Failed to convert project config: ") + file + "\n" + GDRESettings.get_recent_error_string())
 			continue
 
 		GDRESettings.get_errors()
@@ -250,26 +250,26 @@ func _export_files(files: PackedStringArray, output_dir: String, dir_structure: 
 						continue
 			var report: ExportReport = _export_scene(file, output_dir, dir_structure, rel_base, export_glb)
 			if not report:
-				errs.append("Failed to export resource: " + file)
+				errs.append(tr("Failed to export resource: ") + file)
 			elif report.error != OK and report.error != ERR_PRINTER_ON_FIRE:
 				if (report.error == ERR_SKIP):
-					errs.append("Exporting cancelled: " + file + "\n" + report.message + "\n" + get_log_error_string(report.get_error_messages()))
+					errs.append(tr("Exporting cancelled: ") + file + "\n" + report.message + "\n" + get_log_error_string(report.get_error_messages()))
 					break
-				errs.append("Failed to export resource: " + file + "\n" + report.message + "\n" + get_log_error_string(report.get_error_messages()))
+				errs.append(tr("Failed to export resource: ") + file + "\n" + report.message + "\n" + get_log_error_string(report.get_error_messages()))
 		if file_ext == "mesh" or (_ret and _ret.get_compat_type().contains("Mesh")) and export_mesh != ExportMeshType.AUTO:
 			var report: ExportReport = _export_mesh(file, output_dir, dir_structure, rel_base, export_mesh)
 			if not report:
-				errs.append("Failed to export resource: " + file + get_log_error_string(GDRESettings.get_errors()))
+				errs.append(tr("Failed to export resource: ") + file + get_log_error_string(GDRESettings.get_errors()))
 			elif report.error != OK and report.error != ERR_PRINTER_ON_FIRE:
-				errs.append("Failed to export resource: " + file + "\n" + report.message + "\n" + get_log_error_string(report.get_error_messages()))
+				errs.append(tr("Failed to export resource: ") + file + "\n" + report.message + "\n" + get_log_error_string(report.get_error_messages()))
 		elif _ret:
 			var iinfo: ImportInfo = ImportInfo.copy(_ret)
 			iinfo.export_dest = get_output_file_name(iinfo.source_file, "res://", dir_structure, iinfo.source_file.get_extension().to_lower(), rel_base)
 			var report: ExportReport = Exporter.export_resource(output_dir, iinfo)
 			if not report:
-				errs.append("Failed to export resource: " + file)
+				errs.append(tr("Failed to export resource: ") + file)
 			elif report.error != OK and report.error != ERR_PRINTER_ON_FIRE:
-				errs.append("Failed to export resource: " + file + "\n" + report.message + "\n" + get_log_error_string(report.get_error_messages()))
+				errs.append(tr("Failed to export resource: ") + file + "\n" + report.message + "\n" + get_log_error_string(report.get_error_messages()))
 			else:
 				var actual_output_path = report.saved_path
 				var rel_path = actual_output_path.simplify_path().trim_prefix(output_dir).trim_prefix("/")
@@ -283,14 +283,14 @@ func _export_files(files: PackedStringArray, output_dir: String, dir_structure: 
 			var dest_file = get_output_file_name(file, output_dir, dir_structure, ext, rel_base)
 			var err = Exporter.export_file(dest_file, file)
 			if err:
-				errs.append("Failed to export file: " + file + "\n" + GDRESettings.get_recent_error_string())
+				errs.append(tr("Failed to export file: ") + file + "\n" + GDRESettings.get_recent_error_string())
 		elif ResourceFormatLoaderCompatBinary.is_binary_resource(file):
 			var new_ext = "tres"
 			if file.get_extension().to_lower() == "scn":
 				new_ext = "tscn"
 			var err = ResourceCompatLoader.to_text(file, get_output_file_name(file, output_dir, dir_structure, new_ext, rel_base))
 			if err:
-				errs.append("Failed to export file: " + file + "\n" + GDRESettings.get_recent_error_string())
+				errs.append(tr("Failed to export file: ") + file + "\n" + GDRESettings.get_recent_error_string())
 		else:
 			# extract the file
 			var err = extract_file(file, output_dir, dir_structure, rel_base)
@@ -309,9 +309,9 @@ func _on_export_resources_confirmed(output_dir: String):
 
 func _show_error_or_success(errs: PackedStringArray, success_message: String, output_dir: String):
 	if errs.size() > 0:
-		popup_error_box("\n".join(errs), "Error")
+		popup_error_box("\n".join(errs), tr("Error"))
 	else:
-		popup_confirm_box(success_message, "Success", func(): OS.shell_open(GDRECommon.path_to_uri(output_dir)), func(): pass, "Open Folder", "OK")
+		popup_confirm_box(success_message, tr("Success"), func(): OS.shell_open(GDRECommon.path_to_uri(output_dir)), func(): pass, tr("Open Folder"), tr("OK"))
 
 func _do_export(output_dir: String, export_preview_visible: bool):
 	var files: PackedStringArray = []
@@ -330,7 +330,7 @@ func _do_export(output_dir: String, export_preview_visible: bool):
 	if export_preview_visible:
 		%GdreResourcePreview.set_main_view_visible(true)
 
-	GDREMainLoop.call_on_next_process(GDREMainLoop.call_on_next_process.bind(self._show_error_or_success.bind(errs, "Successfully exported resources", output_dir)))
+	GDREMainLoop.call_on_next_process(GDREMainLoop.call_on_next_process.bind(self._show_error_or_success.bind(errs, tr("Successfully exported resources"), output_dir)))
 
 
 
@@ -356,7 +356,7 @@ func _do_extract(path: String):
 		var err = extract_file(file, path, dir_structure, rel_base)
 		if not err.is_empty():
 			errs.append(err)
-	GDREMainLoop.call_on_next_process(GDREMainLoop.call_on_next_process.bind(self._show_error_or_success.bind(errs, "Successfully extracted resources", path)))
+	GDREMainLoop.call_on_next_process(GDREMainLoop.call_on_next_process.bind(self._show_error_or_success.bind(errs, tr("Successfully extracted resources"), path)))
 
 func _determine_rel_base_dir(selected_items: Array) -> String:
 	var base_dirs: Dictionary = {}
@@ -492,8 +492,8 @@ func _ready():
 	setup_export_resources_dir_dialog()
 	setup_extract_resources_dir_dialog()
 	DIRECTORY.text = get_default_dir()
-	FILE_TREE.add_custom_right_click_item("Extract Selected...", self._on_extract_resources_pressed)
-	FILE_TREE.add_custom_right_click_item("Export Selected...", self._on_export_resources_pressed)
+	FILE_TREE.add_custom_right_click_item(tr("Extract Selected..."), self._on_extract_resources_pressed)
+	FILE_TREE.add_custom_right_click_item(tr("Export Selected..."), self._on_export_resources_pressed)
 	# load_test()
 
 func add_project(paths: PackedStringArray) -> int:
@@ -512,9 +512,9 @@ func add_project(paths: PackedStringArray) -> int:
 	VERSION_TEXT.text = GDRESettings.get_version_string()
 	var arr: Array = GDRESettings.get_file_info_array()
 	FILE_TREE.add_files_from_packed_infos(arr, skipped, GDRESettings.had_encryption_error())
-	INFO_TEXT.text = "Total files: " + String.num_int64(FILE_TREE.num_files)# +
+	INFO_TEXT.text = tr("Total files: ") + String.num_int64(FILE_TREE.num_files)# +
 	if FILE_TREE.num_broken > 0 or FILE_TREE.num_malformed > 0:
-		INFO_TEXT.text += "   Broken files: " + String.num_int64(FILE_TREE.num_broken) + "    Malformed paths: " + String.num_int64(FILE_TREE.num_malformed)
+		INFO_TEXT.text += "   " + tr("Broken files: ") + String.num_int64(FILE_TREE.num_broken) + "    " + tr("Malformed paths: ") + String.num_int64(FILE_TREE.num_malformed)
 	DIRECTORY.text = get_default_dir().path_join(GDRECommon.get_safe_dir_name(GDRESettings.get_game_name()))
 
 	if GodotMonoDecompWrapper.is_godot_mono_decomp_enabled() and GDRESettings.project_requires_dotnet_assembly():
@@ -623,12 +623,12 @@ func _on_show_resource_preview_toggled(toggled_on: bool) -> void:
 		# get the current size of the window
 		# set the split offset to 50% of the window size
 		HSPLIT_CONTAINER.set_split_offset((self.size.x / self.content_scale_factor) / 2)
-		SHOW_PREVIEW_BUTTON.text = "Hide Resource Preview"
+		SHOW_PREVIEW_BUTTON.text = tr("Hide Resource Preview")
 		_on_file_tree_item_selected()
 	else:
 		RESOURCE_PREVIEW.visible = false
 		HSPLIT_CONTAINER.set_split_offset(0)
-		SHOW_PREVIEW_BUTTON.text = "Show Resource Preview..."
+		SHOW_PREVIEW_BUTTON.text = tr("Show Resource Preview...")
 		RESOURCE_PREVIEW.reset()
 
 
@@ -644,17 +644,17 @@ func _on_download_confirm_dialog_confirmed() -> void:
 
 func set_assembly_good(good: bool) -> void:
 	if good:
-		%AssemblyLabel.text = "C# Assembly"
+		%AssemblyLabel.text = tr("C# Assembly")
 		%AssemblyLabel.tooltip_text = ""
 	else:
-		%AssemblyLabel.text = "C# Assembly ⚠️"
+		%AssemblyLabel.text = tr("C# Assembly ⚠️")
 		if FileAccess.file_exists(%Assembly.text):
 			if GodotMonoDecompWrapper.is_file_assembly(%Assembly.text):
-				%AssemblyLabel.tooltip_text = "File is NativeAOT assembly, not supported by GDRE Tools"
+				%AssemblyLabel.tooltip_text = tr("File is NativeAOT assembly, not supported by GDRE Tools")
 			else:
-				%AssemblyLabel.tooltip_text = "File is not a valid .NET IL assembly (corrupt?)"
+				%AssemblyLabel.tooltip_text = tr("File is not a valid .NET IL assembly (corrupt?)")
 		else:
-			%AssemblyLabel.tooltip_text = "File does not exist"
+			%AssemblyLabel.tooltip_text = tr("File does not exist")
 
 
 func _on_assembly_button_pressed() -> void:
@@ -714,12 +714,12 @@ func _reload_with(paths: PackedStringArray):
 			added_path = true
 			new_paths.append(path)
 	if not added_path:
-		popup_error_box("Error: selected PCK(s) are already loaded")
+		popup_error_box(tr("Error: selected PCK(s) are already loaded"))
 		return
 	GDRESettings.unload_project(true)
 	var err = add_project(new_paths)
 	if (err != OK):
-		popup_error_box("Error: failed to open " + str(paths), "Error", self.close)
+		popup_error_box(tr("Error: failed to open ") + str(paths), tr("Error"), self.close)
 		return
 
 
