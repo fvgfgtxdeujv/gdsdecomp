@@ -54,30 +54,30 @@ func confirm():
 	var bytecode_revision = get_bytecode_revision()
 	var decomp = GDScriptDecomp.create_decomp_for_commit(bytecode_revision)
 	if decomp == null:
-		popup_error_box("Failed to create decompiler for version: " + engine_version + " (revision: " + String.num_int64(bytecode_revision, 16) + ")", "Decompiler Error")
+		popup_error_box(tr("Failed to create decompiler for version: ") + engine_version + tr(" (revision: ") + String.num_int64(bytecode_revision, 16) + ")", tr("Decompiler Error"))
 		return
 	var files = get_file_list()
 	if files.size() == 0:
-		popup_error_box("No files selected", "Error")
+		popup_error_box(tr("No files selected"), tr("Error"))
 		return
 	var dest_folder = %DestinationFolder.text
 	if dest_folder == "":
-		popup_error_box("No destination folder selected", "Error")
+		popup_error_box(tr("No destination folder selected"), tr("Error"))
 		return
 	for file in files:
 		var err = decomp.decompile_byte_code(file)
 		if err != OK:
-			popup_error_box("Failed to decompile file: " + file, "Decompile Error")
+			popup_error_box(tr("Failed to decompile file: ") + file, tr("Decompile Error"))
 			return
 		var decompiled = decomp.get_script_text()
 		var dest_file = dest_folder.path_join(file.get_file().get_basename() + ".gd")
 		var f = FileAccess.open(dest_file, FileAccess.WRITE)
 		if f == null:
-			popup_error_box("Failed to open file for writing: " + dest_file, "File Error")
+			popup_error_box(tr("Failed to open file for writing: ") + dest_file, tr("File Error"))
 			return
 		f.store_string(decompiled)
 		f.close()
-	popup_confirm_box("The following files were successfully decompiled: " + "\n".join(files), "Decompile Complete", self.close, self.close)
+	popup_confirm_box(tr("The following files were successfully decompiled: ") + "\n".join(files), tr("Decompile Complete"), self.close, self.close)
 
 
 func _get_bytecode_version_for_file(buf: PackedByteArray) -> int:
@@ -96,12 +96,12 @@ func get_bytecode_buffer_for_file(file: String) -> PackedByteArray:
 	if file.get_extension().to_lower() == "gde":
 		var buf = GDScriptDecomp.get_buffer_encrypted(file, 3, GDRESettings.get_encryption_key())
 		if buf.size() == 0:
-			process_error("ERROR: Failed to get bytecode buffer for encrypted file (did you set the encryption key?)")
+			process_error(tr("ERROR: Failed to get bytecode buffer for encrypted file (did you set the encryption key?)"))
 			return PackedByteArray()
 		return buf
 	var fa = FileAccess.open(file, FileAccess.READ)
 	if fa == null:
-		process_error("ERROR: Failed to open file: " + file)
+		process_error(tr("ERROR: Failed to open file: ") + file)
 		return PackedByteArray()
 	return fa.get_buffer(fa.get_length())
 
@@ -120,13 +120,13 @@ func process_error(error: String) -> void:
 func _test_bytecode_for_file(file_bufs: Dictionary[String, PackedByteArray], item_bytecode_revision: int) -> bool:
 	var decomp = GDScriptDecomp.create_decomp_for_commit(item_bytecode_revision)
 	if decomp == null:
-		process_error("WARNING: Failed to create decompiler for revision: " + String.num_int64(item_bytecode_revision, 16))
+		process_error(tr("WARNING: Failed to create decompiler for revision: ") + String.num_int64(item_bytecode_revision, 16))
 		return false
 	for file: String in file_bufs.keys():
 		var test_result = decomp.test_bytecode(file_bufs[file])
 		if test_result != GDScriptDecomp.BYTECODE_TEST_PASS:
 			var err_str = decomp.get_error_message()
-			process_error("WARNING: bytecode test failed for file: " + file.get_file() + "\n" + err_str)
+			process_error(tr("WARNING: bytecode test failed for file: ") + file.get_file() + "\n" + err_str)
 			return false
 	return true
 
@@ -150,15 +150,15 @@ func _update_bytecode_selector() -> void:
 		if version != 0:
 			bytecode_versions[version] = true
 		else:
-			process_error("Invalid GDScript bytecode file: " + file)
+			process_error(tr("Invalid GDScript bytecode file: ") + file)
 			reset_bytecode_selector()
 			return
 	if bytecode_versions.size() == 0:
-		process_error("No bytecode versions found")
+		process_error(tr("No bytecode versions found"))
 		reset_bytecode_selector()
 		return
 	if bytecode_versions.size() > 1:
-		process_error("Multiple bytecode versions found: " + ", ".join(bytecode_versions.keys()))
+		process_error(tr("Multiple bytecode versions found: ") + ", ".join(bytecode_versions.keys()))
 		reset_bytecode_selector()
 		return
 
@@ -190,13 +190,13 @@ func _refresh_decomp_preview() -> void:
 	var items = %FileList.get_selected_items()
 	var revision = get_bytecode_revision()
 	if revision == 0 and items.size() == 0:
-		%GDRETextEditor.load_text_string("Select a file and bytecode version to see the decompiled code")
+		%GDRETextEditor.load_text_string(tr("Select a file and bytecode version to see the decompiled code"))
 		return
 	elif revision == 0:
-		%GDRETextEditor.load_text_string("Select a bytecode version to see the decompiled code")
+		%GDRETextEditor.load_text_string(tr("Select a bytecode version to see the decompiled code"))
 		return
 	elif items.size() == 0:
-		%GDRETextEditor.load_text_string("Select a file to see the decompiled code")
+		%GDRETextEditor.load_text_string(tr("Select a file to see the decompiled code"))
 		return
 	# single selection mode, so there will only be one item selected
 	var path = %FileList.get_item_text(items[0]).strip_edges()
@@ -231,12 +231,12 @@ func _on_show_resource_preview_toggled(toggled_on: bool) -> void:
 		%BytecodeSelector.fit_to_longest_item = false
 		%GDRETextEditor.visible = true
 		%MainSplit.set_split_offset(-(self.size.x / self.content_scale_factor / 2.0))
-		%PreviewButton.text = "Hide Preview"
+		%PreviewButton.text = tr("Hide Preview")
 	else:
 		%BytecodeSelector.fit_to_longest_item = true
 		%GDRETextEditor.visible = false
 		%MainSplit.set_split_offset(0)
-		%PreviewButton.text = "Show Preview..."
+		%PreviewButton.text = tr("Show Preview...")
 		%GDRETextEditor.reset()
 	reset_bytecode_selector()
 	refresh()

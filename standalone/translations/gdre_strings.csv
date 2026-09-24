@@ -563,3 +563,4 @@ WARNING: This involves downloading the package from nuget.org and checking the h
 "git","git","git"
 "Select %s...","Select %s...","选择%s..."
 "Directory","Directory","目录"
+" (revision: "," (revision: ","（修订版： "
