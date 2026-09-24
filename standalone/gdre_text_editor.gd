@@ -249,7 +249,7 @@ func set_viewer_text(text: String):
 		var truncated_text = ""
 		for line in lines:
 			if line.length() > 12000:
-				var truncated_suffix = " <TRUNCATED...>"
+				var truncated_suffix = tr(" <TRUNCATED...>")
 				var truncated_line = line.left(12000)
 				# prevent highlighter from breaking on the truncated line
 				if (truncated_line.count("\"") % 2 != 0):
@@ -281,7 +281,7 @@ func load_code(path, override_bytecode_revision: int = 0) -> bool:
 				code_text = decompiler.decompile_individual_file(path)
 				set_highlight_type(HighlightType.CSHARP)
 			else:
-				code_text = "Error loading script:\nNo .NET assembly loaded"
+				code_text = tr("Error loading script:\nNo .NET assembly loaded")
 				set_highlight_type(HighlightType.TEXT)
 		else:
 			set_highlight_type(HighlightType.CSHARP)
@@ -291,7 +291,7 @@ func load_code(path, override_bytecode_revision: int = 0) -> bool:
 			script.set_override_bytecode_revision(override_bytecode_revision)
 		script.load_source_code(path)
 		if not script.get_error_message().is_empty():
-			code_text = "Error loading script:\n" + script.get_error_message()
+			code_text = tr("Error loading script:\n") + script.get_error_message()
 			set_highlight_type(HighlightType.TEXT)
 		else:
 			code_text = script.get_source_code()
@@ -567,17 +567,17 @@ func add_item_with_shortcut(menu: PopupMenu, id, text: String, shortcut: Shortcu
 	menu.set_item_disabled(menu.get_item_index(id), disabled)
 
 func _add_items_to_popup_menu(menu: PopupMenu):
-	add_item_with_shortcut(menu, show_tabs_popup_id, "Show Tabs", null, true)
-	add_item_with_shortcut(menu, show_spaces_popup_id, "Show Spaces", null, true)
-	add_item_with_shortcut(menu, word_wrap_popup_id, "Word Wrap", gen_short_cut(KEY_Z, false, true), true)
+	add_item_with_shortcut(menu, show_tabs_popup_id, tr("Show Tabs"), null, true)
+	add_item_with_shortcut(menu, show_spaces_popup_id, tr("Show Spaces"), null, true)
+	add_item_with_shortcut(menu, word_wrap_popup_id, tr("Word Wrap"), gen_short_cut(KEY_Z, false, true), true)
 	menu.add_separator()
-	add_item_with_shortcut(menu, text_size_plus_id, "Zoom In", gen_short_cut([KEY_EQUAL, KEY_PLUS], true))
-	add_item_with_shortcut(menu, text_size_minus_id, "Zoom Out", gen_short_cut(KEY_MINUS, true))
+	add_item_with_shortcut(menu, text_size_plus_id, tr("Zoom In"), gen_short_cut([KEY_EQUAL, KEY_PLUS], true))
+	add_item_with_shortcut(menu, text_size_minus_id, tr("Zoom Out"), gen_short_cut(KEY_MINUS, true))
 	menu.add_separator()
-	add_item_with_shortcut(menu, find_popup_id, "Find...", find_replace_bar.get_find_shortcut())
-	add_item_with_shortcut(menu, replace_popup_id, "Replace...", find_replace_bar.get_replace_shortcut(), false, not find_replace_bar.is_replace_enabled())
-	add_item_with_shortcut(menu, find_next_popup_id, "Find Next", find_replace_bar.get_find_next_shortcut())
-	add_item_with_shortcut(menu, find_prev_popup_id, "Find Previous", find_replace_bar.get_find_prev_shortcut())
+	add_item_with_shortcut(menu, find_popup_id, tr("Find..."), find_replace_bar.get_find_shortcut())
+	add_item_with_shortcut(menu, replace_popup_id, tr("Replace..."), find_replace_bar.get_replace_shortcut(), false, not find_replace_bar.is_replace_enabled())
+	add_item_with_shortcut(menu, find_next_popup_id, tr("Find Next"), find_replace_bar.get_find_next_shortcut())
+	add_item_with_shortcut(menu, find_prev_popup_id, tr("Find Previous"), find_replace_bar.get_find_prev_shortcut())
 
 
 	_on_code_viewer_options_pressed(-1)
