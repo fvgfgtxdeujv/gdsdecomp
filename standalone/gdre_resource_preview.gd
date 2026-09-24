@@ -116,35 +116,35 @@ func pop_resource_info(path: String, info: Dictionary):
 	if not info.is_empty():
 		var type = info.get("type", "")
 		var format = info.get("format_type", "")
-		info_text = RESOURCE_INFO_TEXT_FORMAT % [path, type, format]
+		info_text = tr(RESOURCE_INFO_TEXT_FORMAT) % [path, type, format]
 		var ver_major = info.get("ver_major", 0)
 		if format == "binary" and ver_major > 0:
 			var ver_minor = info.get("ver_minor", 0)
-			info_text += "\n[b]Engine Version:[/b] " + str(ver_major) + "." + str(ver_minor)
+			info_text += "\n" + tr("[b]Engine Version:[/b] ") + str(ver_major) + "." + str(ver_minor)
 			if ver_major <= 2:
 				# Showing V2 import info in the info box because there's no other way to look at the v2 import metadata in binary resources
 				var iinfo: ImportInfo = GDRESettings.get_import_info_by_dest(path)
 				if iinfo and iinfo.get_iitype() == ImportInfo.V2 and iinfo.is_import():
 					info_text += "\n"
 					if (iinfo.get_additional_sources().size() > 0):
-						info_text += "[b]Source Files:[/b] [" + "\n"
+						info_text += tr("[b]Source Files:[/b] [") + "\n"
 						for source in PackedStringArray([iinfo.source_file]) + iinfo.get_additional_sources():
 							info_text += "\t" + source + "\n"
 						info_text += "]\n"
 					else:
-						info_text += "[b]Source File:[/b] "
+						info_text += tr("[b]Source File:[/b] ")
 						info_text += iinfo.source_file + "\n"
-					info_text += "[b]Importer:[/b] "
+					info_text += tr("[b]Importer:[/b] ")
 					info_text += iinfo.get_importer() + "\n"
 					if (iinfo.params.size() > 0):
-						info_text += "[b]Import Options:[/b] {" + "\n"
+						info_text += tr("[b]Import Options:[/b] {") + "\n"
 						for key in iinfo.params.keys():
 							info_text += "\t" + str(key) + ": " + str(iinfo.params[key]) + "\n"
 						info_text += "}\n"
 					else:
-						info_text += "[b]Import Options:[/b] {}\n"
+						info_text += tr("[b]Import Options:[/b] {}\n")
 	else:
-		info_text = "[b]Path:[/b] " + path
+		info_text = tr("[b]Path:[/b] ") + path
 	%ResourceInfo.text = info_text
 
 func is_mesh(ext, type: String):
@@ -155,7 +155,7 @@ func is_scene(ext, type: String):
 
 func load_mesh(path):
 	var res = ResourceCompatLoader.real_load(path, "", ResourceCompatLoader.CACHE_MODE_IGNORE_DEEP)
-	%SwitchViewButton.text = SWITCH_TO_TEXT_TEXT
+	%SwitchViewButton.text = tr(SWITCH_TO_TEXT_TEXT)
 	%SwitchViewButton.visible = true
 	if not res:
 		return false
@@ -196,7 +196,7 @@ func load_scene(path):
 
 func _load_scene_complete(res: PackedScene, is_cached: bool = false):
 	_make_all_views_invisible()
-	%SwitchViewButton.text = SWITCH_TO_TEXT_TEXT
+	%SwitchViewButton.text = tr(SWITCH_TO_TEXT_TEXT)
 	%SwitchViewButton.visible = true
 	if not res:
 		return false
@@ -249,17 +249,17 @@ func can_preview_scene():
 
 func text_preview_check_button(path, type):
 	if (is_mesh(path.get_extension().to_lower(), type)):
-		%SwitchViewButton.text = SWITCH_TO_MESH_TEXT
+		%SwitchViewButton.text = tr(SWITCH_TO_MESH_TEXT)
 		%SwitchViewButton.visible = true
 	elif (is_scene(path.get_extension().to_lower(), type)):
 		if (can_preview_scene()):
-			%SwitchViewButton.text = SWITCH_TO_SCENE_TEXT
+			%SwitchViewButton.text = tr(SWITCH_TO_SCENE_TEXT)
 			%SwitchViewButton.visible = true
 
 
 func handle_error_opening(path):
 	# %SwitchViewButton.visible = false
-	%TextView.load_text_string("Error opening resource:\n" + GDRESettings.get_recent_error_string())
+	%TextView.load_text_string(tr("Error opening resource:\n") + GDRESettings.get_recent_error_string())
 	%TextView.visible = true
 	%ResourceInfo.text = path
 
@@ -305,7 +305,7 @@ func load_resource(path: String) -> void:
 			error_opening = not try_text_preview(path, type, current_resource_type)
 
 	if (not_supported):
-		%TextView.load_text_string("Not a supported resource")
+		%TextView.load_text_string(tr("Not a supported resource"))
 		%TextView.visible = true
 		%ResourceInfo.text = path
 	elif (error_opening):
@@ -467,33 +467,31 @@ func _on_switch_view_button_pressed() -> void:
 	current_resource_path = path
 	var error_opening = false
 
-	match cur_text:
-		SWITCH_TO_SCENE_TEXT:
-			if %ScenePreviewer3D.get_edited_resource_path() != path:
-				error_opening = not load_scene(path)
-			else:
-				%ScenePreviewer3D.visible = true
-			if not error_opening:
-				%SwitchViewButton.text = SWITCH_TO_TEXT_TEXT
-				%SwitchViewButton.visible = true
-		SWITCH_TO_MESH_TEXT:
-			if %MeshPreviewer.get_edited_resource_path() != path:
-				error_opening = not load_mesh(path)
-			else:
-				%MeshPreviewer.visible = true
-			if not error_opening:
-				%SwitchViewButton.text = SWITCH_TO_TEXT_TEXT
-				%SwitchViewButton.visible = true
-		SWITCH_TO_TEXT_TEXT:
-			if %TextView.current_path != path:
-				error_opening = not try_text_preview(path, %TextView.recognize(path), current_resource_type)
-			else:
-				%TextView.visible = true
-			if not error_opening:
-				text_preview_check_button(path, current_resource_type)
-		_:
-			print("!!!!!Unknown switch view button text: ", cur_text)
-			pass
+	if cur_text == tr(SWITCH_TO_SCENE_TEXT):
+		if %ScenePreviewer3D.get_edited_resource_path() != path:
+			error_opening = not load_scene(path)
+		else:
+			%ScenePreviewer3D.visible = true
+		if not error_opening:
+			%SwitchViewButton.text = tr(SWITCH_TO_TEXT_TEXT)
+			%SwitchViewButton.visible = true
+	elif cur_text == tr(SWITCH_TO_MESH_TEXT):
+		if %MeshPreviewer.get_edited_resource_path() != path:
+			error_opening = not load_mesh(path)
+		else:
+			%MeshPreviewer.visible = true
+		if not error_opening:
+			%SwitchViewButton.text = tr(SWITCH_TO_TEXT_TEXT)
+			%SwitchViewButton.visible = true
+	elif cur_text == tr(SWITCH_TO_TEXT_TEXT):
+		if %TextView.current_path != path:
+			error_opening = not try_text_preview(path, %TextView.recognize(path), current_resource_type)
+		else:
+			%TextView.visible = true
+		if not error_opening:
+			text_preview_check_button(path, current_resource_type)
+	else:
+		print("!!!!!Unknown switch view button text: ", cur_text)
 	if error_opening:
 		handle_error_opening(path)
 
