@@ -565,3 +565,4 @@ WARNING: This involves downloading the package from nuget.org and checking the h
 "Directory","Directory","目录"
 " (revision: "," (revision: ","（修订版： "
 "Select items to map!","Select items to map!","请选择要映射的条目！"
+"[color=#FF0000]ERROR:[/color]","[color=#FF0000]ERROR:[/color]","[color=#FF0000]错误：[/color]"

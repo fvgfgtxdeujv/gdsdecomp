@@ -123,12 +123,12 @@ func _process(_delta):
 func _verify(_val = null) -> void:
 	var errors: PackedStringArray = []
 	if DIRECTORY.text.is_empty():
-		errors.append("Directory is not selected")
+		errors.append(tr("Directory is not selected"))
 	if EMBED.is_pressed() and EMBED_SOURCE.text.is_empty():
-		errors.append("Embed source is empty")
+		errors.append(tr("Embed source is empty"))
 	if errors.size() > 0:
 		SAVE_BUTTON.disabled = true
-		ERROR_TEXT.text = "[color=#FF0000]ERROR:[/color]"
+		ERROR_TEXT.text = tr("[color=#FF0000]ERROR:[/color]")
 		ERROR_TEXT.visible = true
 		for err in errors:
 			ERROR_TEXT.text += "\n" + "[color=#FF0000]" + err + "[/color]"
@@ -146,7 +146,7 @@ func _on_directory_dialog_dir_selected(dir: String) -> void:
 	_verify()
 
 func _on_embed_source_select_pressed() -> void:
-	EMBED_SOURCE_DIALOG.filename_filter = "*.exe,*.bin,*.32,*.64;Self contained executable files"
+	EMBED_SOURCE_DIALOG.filename_filter = tr("*.exe,*.bin,*.32,*.64;Self contained executable files")
 	EMBED_SOURCE_DIALOG.popup_centered()
 
 func _on_embed_source_dialog_file_selected(dir: String) -> void:
@@ -157,13 +157,13 @@ func _on_embed_source_dialog_file_selected(dir: String) -> void:
 func _on_save_pressed() -> void:
 	var text = DIRECTORY.text.get_file().get_basename()
 	if EMBED.is_pressed():
-		SAVE_DIALOG.filename_filter = "*.exe,*.bin,*.32,*.64;Self contained executable files"
+		SAVE_DIALOG.filename_filter = tr("*.exe,*.bin,*.32,*.64;Self contained executable files")
 		if (OS.get_name() == "Windows"):
 			text = text + ".exe"
 		else:
 			text = text + ".64"
 	else:
-		SAVE_DIALOG.filename_filter = "*.pck;PCK files"
+		SAVE_DIALOG.filename_filter = tr("*.pck;PCK files")
 		text = text + ".pck"
 	SAVE_DIALOG.current_dir = DIRECTORY.text.get_base_dir()
 	SAVE_DIALOG.current_file = text
