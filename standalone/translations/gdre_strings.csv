@@ -1,4 +1,4 @@
-keys,en,zh_CN
+"keys","en","zh_CN"
 "Compile GDScript","Compile GDScript","编译 GDScript"
 "Add files...","Add files...","添加文件..."
 "Remove files","Remove files","移除文件"
@@ -47,9 +47,9 @@ keys,en,zh_CN
 "About Godot RE Tools","About Godot RE Tools","关于 Godot RE Tools"
 "Report a bug...","Report a bug...","报告 bug..."
 "Quit","Quit","退出"
-"PCK","PCK",
+"PCK","PCK",""
 "Create PCK archive from folder...","Create PCK archive from folder...","从文件夹创建 PCK 归档..."
-"GDScript","GDScript",
+"GDScript","GDScript",""
 "Decompile .GDC/.GDE script files...","Decompile .GDC/.GDE script files...","反编译 .GDC/.GDE 脚本文件..."
 "Compile .GD script files...","Compile .GD script files...","编译 .GD 脚本文件..."
 "Resources","Resources","资源"
@@ -190,7 +190,7 @@ keys,en,zh_CN
 "Certain assets have been written to the .assets directory!","Certain assets have been written to the .assets directory!","部分资源已写入 .assets 目录！"
 " (Steam Mono edition)"," (Steam Mono edition)"," (Steam Mono 版)"
 " (Steam edition)"," (Steam edition)"," (Steam 版)"
-" (Mono)"," (Mono)",
+" (Mono)"," (Mono)",""
 "[b]This Project requires a Godot engine built with double precision.[/b]\n","[b]This Project requires a Godot engine built with double precision.[/b]\n","[b]此项目需要使用双精度构建的 Godot 引擎。[/b]\n"
 "You must build the engine with `precision=double` flag to edit this project.\n","You must build the engine with `precision=double` flag to edit this project.\n","必须使用 `precision=double` 标志构建引擎才能编辑此项目。\n"
 "[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]See the Godot documentation[/url] for more information.\n","[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]See the Godot documentation[/url] for more information.\n","[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]详见 Godot 文档[/url]。\n"
@@ -204,25 +204,25 @@ keys,en,zh_CN
 "WAV\nSample Rate: %d Hz\nChannels: %d\nFormat: %s\nLoop Mode: %s","WAV\nSample Rate: %d Hz\nChannels: %d\nFormat: %s\nLoop Mode: %s","WAV\n采样率： %d Hz\n声道数： %d\n格式： %s\n循环模式： %s"
 "Disabled","Disabled","禁用"
 "Forward","Forward","正向"
-"PingPong","PingPong",
+"PingPong","PingPong",""
 "Backward","Backward","反向"
-"PCM 8-bit","PCM 8-bit",
-"PCM 16-bit","PCM 16-bit",
-"ADPCM","ADPCM",
-"Quite OK","Quite OK",
+"PCM 8-bit","PCM 8-bit",""
+"PCM 16-bit","PCM 16-bit",""
+"ADPCM","ADPCM",""
+"Quite OK","Quite OK",""
 "Unknown","Unknown","未知"
 "Loop Begin: ","Loop Begin: ","循环起点： "
 "Loop End: ","Loop End: ","循环终点： "
-"Ogg Vorbis","Ogg Vorbis",
+"Ogg Vorbis","Ogg Vorbis",""
 "Sample Rate: ","Sample Rate: ","采样率： "
-"MP3","MP3",
+"MP3","MP3",""
 "BPM: ","BPM: ","BPM： "
 "Bar Beats: ","Bar Beats: ","每小节拍数： "
 "Beat Count: ","Beat Count: ","拍数： "
 "Loop: Yes","Loop: Yes","循环： 是"
 "Loop: No","Loop: No","循环： 否"
 "Loop Offset: ","Loop Offset: ","循环偏移： "
-"--:-- / --:--","--:-- / --:--",
+"--:-- / --:--","--:-- / --:--",""
 "[b]Path:[/b] %s\n[b]Type:[/b] %s\n[b]Format:[/b] %s","[b]Path:[/b] %s\n[b]Type:[/b] %s\n[b]Format:[/b] %s","[b]路径：[/b] %s\n[b]类型：[/b] %s\n[b]格式：[/b] %s"
 "Switch to Scene View","Switch to Scene View","切换到场景视图"
 "Switch to Mesh View","Switch to Mesh View","切换到网格视图"
@@ -280,3 +280,117 @@ keys,en,zh_CN
 "Failed to write PCK:\n","Failed to write PCK:\n","写入 PCK 失败：\n"
 "PCK patching complete","PCK patching complete","PCK 修补完成"
 "Failed to load project config file","Failed to load project config file","加载项目配置文件失败"
+"(Optional)","(Optional)","(可选)"
+"Add Files...","Add Files...","添加文件..."
+"Add PCK(s)
+","Add PCK(s)
+","添加 PCK
+"
+"Add Translation...
+","Add Translation...
+","添加翻译...
+"
+"CSV File...","CSV File...","CSV 文件..."
+"Check","Check","勾选"
+"Check all","Check all","全部勾选"
+"Checks all shown files","Checks all shown files","勾选所有显示的文件"
+"Clear","Clear","清空"
+"Create New Pck...","Create New Pck...","创建新 PCK..."
+"Directory:","Directory:","目录:"
+"Do you want to discard current changes?","Do you want to discard current changes?","要放弃当前更改吗?"
+"Don't ask again","Don't ask again","不再询问"
+"Embed","Embed","嵌入"
+"Embed into EXE","Embed into EXE","嵌入 EXE"
+"Encrypt Directory","Encrypt Directory","加密目录"
+"Exclude Filters","Exclude Filters","排除过滤器"
+"Export Settings...","Export Settings...","导出设置..."
+"Exporter Settings","Exporter Settings","导出器设置"
+"Extract","Extract","提取"
+"Extract Only","Extract Only","仅提取"
+"Extract to... ","Extract to... ","提取到... "
+"Files to patch...","Files to patch...","要修补的文件..."
+"Filter Files","Filter Files","过滤文件"
+"Force Enable All Versions","Force Enable All Versions","强制启用全部版本"
+"Full Recovery","Full Recovery","完整恢复"
+"GDExtension plugins have been detected.
+Do you want to automatically detect and download?","GDExtension plugins have been detected.
+Do you want to automatically detect and download?","检测到 GDExtension 插件。
+要自动检测并下载吗?"
+"GLTF","GLTF","GLTF"
+"Include Filters:","Include Filters:","包含过滤器:"
+"Locales to patch...","Locales to patch...","要修补的语言..."
+"Log file written to <LOG_FILE_URI>
+[b]Please include this file when reporting an issue![/b]","Log file written to <LOG_FILE_URI>
+[b]Please include this file when reporting an issue![/b]","日志文件已写入 <LOG_FILE_URI>
+[b]反馈问题时请附上此文件![/b]"
+"Map selected to Folder...","Map selected to Folder...","将选中项映射到文件夹..."
+"Open File(s)","Open File(s)","打开文件"
+"Open a Directory","Open a Directory","打开目录"
+"Open a File","Open a File","打开文件"
+"Open a File or Directory","Open a File or Directory","打开文件或目录"
+"Optional decryption script for games with custom encryption","Optional decryption script for games with custom encryption","针对使用自定义加密的游戏的可选解密脚本"
+"PCK Files...              ","PCK Files...              ","PCK 文件              "
+"PCK version","PCK version","PCK 版本"
+"Patch PCK","Patch PCK","修补 PCK"
+"Project Recovery","Project Recovery","项目恢复"
+"Project to Patch...","Project to Patch...","要修补的项目..."
+"Remove Files","Remove Files","移除文件"
+"Reported Godot engine version (<minor>.<major>.<patch>)
+","Reported Godot engine version (<minor>.<major>.<patch>)
+","报告的 Godot 引擎版本(<minor>.<major>.<patch>)
+"
+"Reset to Defaults","Reset to Defaults","重置为默认"
+"Resources, binary code and source code might be protected by copyright and trademark laws. Before using this software make sure that decompilation is not prohibited by the applicable license agreement, permitted under applicable law or you obtained explicit permission from the copyright owner.
+
+The authors and copyright holders of this software do neither encourage nor condone the use of this software, and disclaim any liability for use of the software in violation of applicable laws.
+
+Please report any bugs to the GitHub repository.
+","Resources, binary code and source code might be protected by copyright and trademark laws. Before using this software make sure that decompilation is not prohibited by the applicable license agreement, permitted under applicable law or you obtained explicit permission from the copyright owner.
+
+The authors and copyright holders of this software do neither encourage nor condone the use of this software, and disclaim any liability for use of the software in violation of applicable laws.
+
+Please report any bugs to the GitHub repository.
+","资源、二进制代码和源代码可能受版权和商标法保护。使用本软件前,请确保反编译未被适用的许可协议禁止,或在适用法律允许范围内,或你已获得版权所有者的明确许可。
+
+本软件的作者和版权持有者既不鼓励也不纵容对本软件的滥用,并且对违反适用法律使用本软件的行为不承担任何责任。
+
+请将 bug 反馈到 GitHub 仓库。
+"
+"Save","Save","保存"
+"Save PCK...","Save PCK...","保存 PCK..."
+"Scene Exporter","Scene Exporter","场景导出器"
+"Script Files","Script Files","脚本文件"
+"Select","Select","选择"
+"Select Action...","Select Action...","选择操作..."
+"Select Files...","Select Files...","选择文件..."
+"Select Mapping","Select Mapping","选择映射"
+"Select Output Directory","Select Output Directory","选择输出目录"
+"Select Translation to patch","Select Translation to patch","选择要修补的翻译"
+"Select a directory...","Select a directory...","选择目录..."
+"Select an exe...","Select an exe...","选择 exe..."
+"Select the C# assembly associated with this project...","Select the C# assembly associated with this project...","选择与此项目关联的 C# 程序集..."
+"Set Custom Decryption Script...","Set Custom Decryption Script...","设置自定义解密脚本..."
+"Set Encryption Key","Set Encryption Key","设置加密密钥"
+"Set Encryption Key (64 char hex string...)","Set Encryption Key (64 char hex string...)","设置加密密钥(64 位十六进制字符串...)"
+"Settings","Settings","设置"
+"Translations to Patch","Translations to Patch","要修补的翻译"
+"Uncheck","Uncheck","取消勾选"
+"Uncheck all","Uncheck all","全部取消勾选"
+"Unchecks all shown files","Unchecks all shown files","取消勾选所有显示的文件"
+"Watermark text","Watermark text","水印文本"
+"[b]Important Notes[/b]","[b]Important Notes[/b]","[b]重要说明[/b]"
+"[b]Info:[/b]","[b]Info:[/b]","[b]信息:[/b]"
+"[b]Path:[/b]
+[b]Type:[/b]
+[b]Format:[/b]","[b]Path:[/b]
+[b]Type:[/b]
+[b]Format:[/b]","[b]路径:[/b]
+[b]类型:[/b]
+[b]格式:[/b]"
+"[b]Totals[/b]","[b]Totals[/b]","[b]合计[/b]"
+"[b]Use Godot editor version <GODOT_VER> to edit the project.[/b]
+<CUSTOM_VER_NOTE>","[b]Use Godot editor version <GODOT_VER> to edit the project.[/b]
+<CUSTOM_VER_NOTE>","[b]请使用 Godot 编辑器 <GODOT_VER> 版本来编辑此项目。[/b]
+<CUSTOM_VER_NOTE>"
+"[b]Version:[/b]","[b]Version:[/b]","[b]版本:[/b]"
+"[color=#FF0000]ERROR[/color]","[color=#FF0000]ERROR[/color]","[color=#FF0000]错误[/color]"
