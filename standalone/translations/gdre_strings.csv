@@ -394,3 +394,160 @@ Please report any bugs to the GitHub repository.
 <CUSTOM_VER_NOTE>"
 "[b]Version:[/b]","[b]Version:[/b]","[b]版本:[/b]"
 "[color=#FF0000]ERROR[/color]","[color=#FF0000]ERROR[/color]","[color=#FF0000]错误[/color]"
+"Add imports to git repo","Add imports to git repo","将导入文件加入 git 仓库"
+"Additional assembly search paths","Additional assembly search paths","附加程序集搜索路径"
+"Ask for download","Ask for download","询问是否下载"
+"Automatically find search paths for Steam workshop modules","Automatically find search paths for Steam workshop modules","自动查找 Steam 创意工坊模块的搜索路径"
+"Clear output directory except git before full recovery","Clear output directory except git before full recovery","完整恢复前清空输出目录(git 除外)"
+"Compile after decompile","Compile after decompile","反编译后编译"
+"Copy referenced assemblies","Copy referenced assemblies","复制引用的程序集"
+"Copy template_release plugins to editor plugin","Copy template_release plugins to editor plugin","将 template_release 插件复制到编辑器插件"
+"Create additional projects for project references","Create additional projects for project references","为项目引用创建附加项目"
+"Create debug copies","Create debug copies","创建调试副本"
+"Create git repo in recovered project","Create git repo in recovered project","在恢复的项目中创建 git 仓库"
+"Create lossless copy","Create lossless copy","创建无损副本"
+"Default parent folder for recovery","Default parent folder for recovery","恢复的默认父文件夹"
+"Delete auto-converted files","Delete auto-converted files","删除自动转换的文件"
+"Disable translation key recovery","Disable translation key recovery","禁用翻译键恢复"
+"Download plugins","Download plugins","下载插件"
+"Dump resource strings","Dump resource strings","导出资源字符串"
+"Emit IL annotation comments","Emit IL annotation comments","生成 IL 注解注释"
+"Enable collection initializer lifting","Enable collection initializer lifting","启用集合初始化器提升"
+"Execute VisualShaderNodeCustom scripts","Execute VisualShaderNodeCustom scripts","执行 VisualShaderNodeCustom 脚本"
+"Force Bytecode Revision","Force Bytecode Revision","强制字节码版本"
+"Force C# Language Level","Force C# Language Level","强制 C# 语言级别"
+"Force export multi root","Force export multi root","强制导出多根节点"
+"Force lossless images","Force lossless images","强制无损图片"
+"Force require KHR_node_visibility extension","Force require KHR_node_visibility extension","强制要求 KHR_node_visibility 扩展"
+"Force single-threaded mode","Force single-threaded mode","强制单线程模式"
+"Ignore missing dependencies","Ignore missing dependencies","忽略缺失的依赖"
+"Last GDRE version used","Last GDRE version used","上次使用的 GDRE 版本"
+"Last showed disclaimer","Last showed disclaimer","上次显示免责声明"
+"Load Custom Bytecode","Load Custom Bytecode","加载自定义字节码"
+"Load embedded zips","Load embedded zips","加载内嵌 zip"
+"Load key hint file","Load key hint file","加载键提示文件"
+"Max cores for threaded tasks","Max cores for threaded tasks","多线程任务的最大核心数"
+"Remove generated Json context body","Remove generated Json context body","移除生成的 Json 上下文类主体"
+"Remove physics bodies","Remove physics bodies","移除物理体"
+"Replace shader materials","Replace shader materials","替换着色器材质"
+"Skip loading resource strings","Skip loading resource strings","跳过加载资源字符串"
+"Use double precision","Use double precision","使用双精度"
+"Use scene view by default","Use scene view by default","默认使用场景视图"
+"Verify NuGet package is from NuGet.org","Verify NuGet package is from NuGet.org","校验 NuGet 包是否来自 NuGet.org"
+"Write JSON report","Write JSON report","写入 JSON 报告"
+"Write NuGet package references","Write NuGet package references","写入 NuGet 包引用"
+"Add .godot/imported/ (or .import/ for Godot 3) to the git repo.","Add .godot/imported/ (or .import/ for Godot 3) to the git repo.","将 .godot/imported/(Godot 3 为 .import/)加入 git 仓库。"
+"Additional assembly search paths to use for resolving assembly references.
+This is useful for resolving assembly references in Steam workshop modules that rely on additional assemblies.","Additional assembly search paths to use for resolving assembly references.
+This is useful for resolving assembly references in Steam workshop modules that rely on additional assemblies.","解析程序集引用时使用的附加程序集搜索路径。
+对解析依赖附加程序集的 Steam 创意工坊模块的程序集引用很有用。"
+"Automatically detect binary plugin versions and download them from the asset library","Automatically detect binary plugin versions and download them from the asset library","自动检测二进制插件版本并从资产库下载"
+"Automatically find additional assembly search paths for Steam workshop modules.","Automatically find additional assembly search paths for Steam workshop modules.","自动查找 Steam 创意工坊模块的附加程序集搜索路径。"
+"By default, the C# language level is selected based on the default language level of the target framework of the module.
+This setting forces the C# language level to be the specified value.","By default, the C# language level is selected based on the default language level of the target framework of the module.
+This setting forces the C# language level to be the specified value.","默认情况下,C# 语言级别根据模块目标框架的默认语言级别选择。
+此设置强制使用指定的 C# 语言级别。"
+"By default, the exporter will only set KHR_node_visibility as an optional extension.
+This setting forces the exporter to require the extension regardless of engine version.","By default, the exporter will only set KHR_node_visibility as an optional extension.
+This setting forces the exporter to require the extension regardless of engine version.","默认情况下,导出器仅将 KHR_node_visibility 设为可选扩展。
+此设置强制导出器无论引擎版本如何都要求该扩展。"
+"Clear the output directory except for the .git directory before running a full recovery (i.e. no includes/excludes)","Clear the output directory except for the .git directory before running a full recovery (i.e. no includes/excludes)","运行完整恢复(即不含 include/exclude)前清空输出目录(.git 目录除外)"
+"Compile the C# project after decompiling.
+This is done to prevent editor errors when first opening the project in the editor.
+This requires that you have the dotnet sdk installed.","Compile the C# project after decompiling.
+This is done to prevent editor errors when first opening the project in the editor.
+This requires that you have the dotnet sdk installed.","反编译后编译 C# 项目。
+这是为了避免首次在编辑器中打开项目时出现错误。
+需要安装 dotnet SDK。"
+"Copy referenced assemblies to the project directory.","Copy referenced assemblies to the project directory.","将引用的程序集复制到项目目录。"
+"Create a git repo in the output directory after exporting.
+Requires git to be installed on the system.","Create a git repo in the output directory after exporting.
+Requires git to be installed on the system.","导出后在输出目录创建 git 仓库。
+需要系统已安装 git。"
+"Create a lossless .png copy of exported textures in '<OUTPUT_DIR>/.assets' if the texture is stored in a lossy format (e.g. jpeg)","Create a lossless .png copy of exported textures in '<OUTPUT_DIR>/.assets' if the texture is stored in a lossy format (e.g. jpeg)","若纹理以有损格式(如 jpeg)存储,则在 '<OUTPUT_DIR>/.assets' 中创建导出纹理的无损 .png 副本"
+"Delete auto-converted files (*.gdc, etc.) after exporting. If disabled, the files will be moved to the `.autoconverted` folder.","Delete auto-converted files (*.gdc, etc.) after exporting. If disabled, the files will be moved to the `.autoconverted` folder.","导出后删除自动转换的文件(*.gdc 等)。若禁用,这些文件会被移动到 `.autoconverted` 文件夹。"
+"Detect and write NuGet package references to the project file instead of assembly references.","Detect and write NuGet package references to the project file instead of assembly references.","检测 NuGet 包引用并将其写入项目文件,替代程序集引用。"
+"Disable translation key recovery.
+This will skip the translation key recovery process entirely.","Disable translation key recovery.
+This will skip the translation key recovery process entirely.","禁用翻译键恢复。
+将完全跳过翻译键恢复流程。"
+"Dumps collected resource strings to '<OUTPUT_DIR>/.assets/resource_strings.stringdump'","Dumps collected resource strings to '<OUTPUT_DIR>/.assets/resource_strings.stringdump'","将收集到的资源字符串转储到 '<OUTPUT_DIR>/.assets/resource_strings.stringdump'"
+"Emit ILInstruction annotations as comments for statement/expression nodes.
+Intended for debug verification of annotation propagation.","Emit ILInstruction annotations as comments for statement/expression nodes.
+Intended for debug verification of annotation propagation.","为语句/表达式节点以注释形式输出 ILInstruction 注解。
+用于调试验证注解传播。"
+"Enable the LiftCollectionInitializers transform.
+If disabled, the legacy RemoveBogusBaseConstructorCalls transform is used.","Enable the LiftCollectionInitializers transform.
+If disabled, the legacy RemoveBogusBaseConstructorCalls transform is used.","启用 LiftCollectionInitializers 变换。
+若禁用,则使用旧的 RemoveBogusBaseConstructorCalls 变换。"
+"Execute VisualShaderNodeCustom scripts when loading visual shaders.
+Setting this to `true` can fix errors occurring when exporting scenes that contain VisualShaders.
+
+WARNING: As this executes arbitrary code, this should be considered unsafe.
+Ensure that you trust the source code in this project before enabling this.","Execute VisualShaderNodeCustom scripts when loading visual shaders.
+Setting this to `true` can fix errors occurring when exporting scenes that contain VisualShaders.
+
+WARNING: As this executes arbitrary code, this should be considered unsafe.
+Ensure that you trust the source code in this project before enabling this.","加载可视化着色器时执行 VisualShaderNodeCustom 脚本。
+设为 `true` 可修复导出包含可视化着色器的场景时出现的错误。
+
+警告:这会执行任意代码,应视为不安全操作。
+启用前请确保信任此项目中的源代码。"
+"For development.","For development.","用于开发。"
+"Forces all tasks to run on the main thread","Forces all tasks to run on the main thread","强制所有任务在主线程上运行"
+"Forces images to be saved as lossless PNGs when exporting to GLTF, regardless of the original image format","Forces images to be saved as lossless PNGs when exporting to GLTF, regardless of the original image format","导出到 GLTF 时强制将图片保存为无损 PNG,无论原始图片格式如何"
+"Forces the bytecode revision to be the specified value.","Forces the bytecode revision to be the specified value.","强制使用指定的字节码版本。"
+"Forces the export to export in multi-root mode, even if the scene is a single root","Forces the export to export in multi-root mode, even if the scene is a single root","强制以多根节点模式导出,即使场景是单根节点"
+"If a project reference is detected, create an additional project and add it to the solution.","If a project reference is detected, create an additional project and add it to the solution.","检测到项目引用时,创建附加项目并将其加入解决方案。"
+"If the plugin was not downloaded, copy the template_release plugin (the library distributed with the game) to the editor plugin path (required for using the plugin in the editor).","If the plugin was not downloaded, copy the template_release plugin (the library distributed with the game) to the editor plugin path (required for using the plugin in the editor).","若插件未下载,则将 template_release 插件(随游戏分发的库)复制到编辑器插件路径(在编辑器中使用该插件所必需)。"
+"Ignore missing dependencies when exporting the scene.","Ignore missing dependencies when exporting the scene.","导出场景时忽略缺失的依赖。"
+"Load a custom bytecode file.","Load a custom bytecode file.","加载自定义字节码文件。"
+"Load a key hint file to use for the translation exporter","Load a key hint file to use for the translation exporter","加载供翻译导出器使用的键提示文件"
+"Load embedded zips within the project pack as part of project loading/recovery","Load embedded zips within the project pack as part of project loading/recovery","在项目加载/恢复时加载项目包内嵌的 zip"
+"Remove the body of generated JsonSourceGeneration context classes.","Remove the body of generated JsonSourceGeneration context classes.","移除生成的 JsonSourceGeneration 上下文类的主体。"
+"Removes physics bodies (CollisionShape3D, CollisionObject3D, etc.) from the scene when exporting to GLTF","Removes physics bodies (CollisionShape3D, CollisionObject3D, etc.) from the scene when exporting to GLTF","导出到 GLTF 时从场景中移除物理体(CollisionShape3D、CollisionObject3D 等)"
+"Replaces shader materials with generated standard materials when exporting the scene.
+Solves issues with exported scenes not having any textures.
+WARNING: This is experimental and may result in inaccurate exports.","Replaces shader materials with generated standard materials when exporting the scene.
+Solves issues with exported scenes not having any textures.
+WARNING: This is experimental and may result in inaccurate exports.","导出场景时用生成的标准材质替换着色器材质。
+解决导出场景没有任何纹理的问题。
+警告:这是实验性功能,可能导致导出结果不准确。"
+"Skip loading resource strings from all resources during translation recovery.
+Don't enable this without a key hint file.","Skip loading resource strings from all resources during translation recovery.
+Don't enable this without a key hint file.","翻译恢复期间跳过从所有资源加载资源字符串。
+没有键提示文件时请勿启用。"
+"The default parent folder to use for recovery.
+If not set, the user's Desktop directory will be used.","The default parent folder to use for recovery.
+If not set, the user's Desktop directory will be used.","恢复时使用的默认父文件夹。
+未设置时将使用用户的桌面目录。"
+"The maximum number of cores to use for threaded tasks (Extract, project recovery, etc.)","The maximum number of cores to use for threaded tasks (Extract, project recovery, etc.)","多线程任务(提取、项目恢复等)使用的最大核心数"
+"Use scene view by default instead of the text preview.
+WARNING: Scene view is still experimental and certain scenes may cause the program to become unresponsive.","Use scene view by default instead of the text preview.
+WARNING: Scene view is still experimental and certain scenes may cause the program to become unresponsive.","默认使用场景视图而非文本预览。
+警告:场景视图仍为实验性功能,某些场景可能导致程序无响应。"
+"Uses double precision for all floating-point values in the GLTF document","Uses double precision for all floating-point values in the GLTF document","GLTF 文档中所有浮点值使用双精度"
+"Verify that the NuGet package is from NuGet.org before writing it to the project file.
+WARNING: This involves downloading the package from nuget.org and checking the hash of the downloaded package.","Verify that the NuGet package is from NuGet.org before writing it to the project file.
+WARNING: This involves downloading the package from nuget.org and checking the hash of the downloaded package.","写入项目文件前校验 NuGet 包是否来自 NuGet.org。
+警告:这会从 nuget.org 下载包并校验其哈希值。"
+"Write a JSON report to the output directory after exporting.","Write a JSON report to the output directory after exporting.","导出后在输出目录写入 JSON 报告。"
+"Auto-detect","Auto-detect","自动检测"
+"Automatically search workshop dependencies","Automatically search workshop dependencies","自动搜索创意工坊依赖"
+"Copy out of tree references","Copy out of tree references","复制树外引用"
+"Create git repo","Create git repo","创建 git 仓库"
+"Debug copies","Debug copies","调试副本"
+"Delete auto converted files","Delete auto converted files","删除自动转换的文件"
+"Disable key recovery","Disable key recovery","禁用键恢复"
+"Execute visual shader node scripts","Execute visual shader node scripts","执行可视化着色器节点脚本"
+"Force bytecode revision","Force bytecode revision","强制字节码版本"
+"Force language version","Force language version","强制语言版本"
+"Force require khr node visibility","Force require khr node visibility","强制要求 khr node visibility"
+"Force single threaded","Force single threaded","强制单线程"
+"Last gdre version used","Last gdre version used","上次使用的 GDRE 版本"
+"Make editor copy","Make editor copy","创建编辑器副本"
+"Max cores to use","Max cores to use","使用的最大核心数"
+"Remove generated json context body","Remove generated json context body","移除生成的 json 上下文类主体"
+"Verify nuget package is from nuget org","Verify nuget package is from nuget org","校验 nuget 包是否来自 nuget org"
+"Write json report","Write json report","写入 json 报告"
+"Write nuget package references","Write nuget package references","写入 nuget 包引用"

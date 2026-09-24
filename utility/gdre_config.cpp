@@ -7,6 +7,7 @@
 #include "core/object/class_db.h"
 #include "core/object/worker_thread_pool.h"
 #include "core/os/os.h"
+#include "core/string/translation_server.h"
 #include "core/variant/variant_utility.h"
 #include "gdre_logger.h"
 #include "gdre_settings.h"
@@ -99,7 +100,7 @@ public:
 		}
 		int current_setting = get_value();
 		auto versions = GDScriptDecompVersion::get_decomp_versions(true, 0);
-		ret[0] = "Auto-detect";
+		ret[0] = RTR("Auto-detect");
 		for (const auto &version : versions) {
 			if ((ver_major > 0 && version.get_major_version() != ver_major)) {
 				if (version.commit != current_setting) {
@@ -610,14 +611,14 @@ String GDREConfigSetting::get_full_name() const {
 }
 
 String GDREConfigSetting::get_name() const {
-	return full_name.get_file();
+	return RTR(full_name.get_file());
 }
 
 String GDREConfigSetting::get_brief_description() const {
 	if (brief_description.is_empty()) {
-		return get_name().replace("_", " ").capitalize();
+		return RTR(full_name.get_file().replace("_", " ").capitalize());
 	}
-	return brief_description;
+	return RTR(brief_description);
 }
 
 Variant::Type GDREConfigSetting::get_type() const {
@@ -625,7 +626,7 @@ Variant::Type GDREConfigSetting::get_type() const {
 }
 
 String GDREConfigSetting::get_description() const {
-	return description;
+	return RTR(description);
 }
 
 Variant GDREConfigSetting::get_default_value() const {
