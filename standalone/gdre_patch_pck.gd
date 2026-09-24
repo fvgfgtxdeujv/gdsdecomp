@@ -58,7 +58,7 @@ func _on_patch_tree_button_clicked(item: TreeItem, _column: int, id: int, mouse_
 	match id:
 		PatchTreeButton.SELECT:
 			if (not GDRESettings.is_pack_loaded()):
-				popup_error_box("Load a pack first!", "Error")
+				popup_error_box(tr("Load a pack first!"), tr("Error"))
 				return
 			button_clicked_item = item
 			PATCH_FILE_MAPPING_DIALOG.current_file = item.get_text(0).get_file()
@@ -80,7 +80,7 @@ func _on_files_dropped(files: PackedStringArray):
 	if FILE_TREE.get_global_rect().has_point(mouse_pos):
 		# convert the global mouse position to local position
 		if (files.size() > 1):
-			popup_error_box("You can only patch one PCK at a time", "Error")
+			popup_error_box(tr("You can only patch one PCK at a time"), tr("Error"))
 			return
 		_on_select_pck_dialog_file_selected(files[0])
 	elif PATCH_FILE_TREE.get_global_rect().has_point(mouse_pos):
@@ -112,10 +112,10 @@ var _tmp_selected_files: Array = []
 
 func map_all_to_folder(selected_items: Array):
 	if (not GDRESettings.is_pack_loaded()):
-		popup_error_box("Load a pack first!", "Error")
+		popup_error_box(tr("Load a pack first!"), tr("Error"))
 		return
 	if (selected_items.is_empty()):
-		popup_error_box("Select items to map!", "Error")
+		popup_error_box(tr("Select items to map!"), tr("Error"))
 		return
 	_tmp_selected_files.clear()
 	_tmp_selected_files = selected_items
@@ -143,10 +143,10 @@ func _ready():
 	EMBED_CHECKBOX = %EmbedCheckBox
 	$SavePckDialog.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 
-	DROP_FOLDERS_LIST_A.set_column_title(0, "File")
-	DROP_FOLDERS_LIST_A.set_column_title(1, "Mapping")
-	DROP_FOLDERS_LIST_B.set_column_title(0, "File")
-	DROP_FOLDERS_LIST_B.set_column_title(1, "Mapping")
+	DROP_FOLDERS_LIST_A.set_column_title(0, tr("File"))
+	DROP_FOLDERS_LIST_A.set_column_title(1, tr("Mapping"))
+	DROP_FOLDERS_LIST_B.set_column_title(0, tr("File"))
+	DROP_FOLDERS_LIST_B.set_column_title(1, tr("Mapping"))
 
 	# This is a hack to get around not being able to open multiple scenes
 	# unless they're attached to windows
@@ -154,11 +154,11 @@ func _ready():
 	clear()
 	PATCH_FILE_TREE.connect("item_edited", self._on_patch_tree_item_edited)
 	PATCH_FILE_TREE.connect("button_clicked", self._on_patch_tree_button_clicked)
-	PATCH_FILE_TREE.set_column_title(0, "File")
-	PATCH_FILE_TREE.set_column_title(1, "Mapping")
+	PATCH_FILE_TREE.set_column_title(0, tr("File"))
+	PATCH_FILE_TREE.set_column_title(1, tr("Mapping"))
 	PATCH_FILE_TREE.set_column_custom_minimum_width(1, 0)
 	PATCH_FILE_TREE.set_column_expand(1, true)
-	PATCH_FILE_TREE.add_custom_right_click_item("Map to Folder...", self.map_all_to_folder)
+	PATCH_FILE_TREE.add_custom_right_click_item(tr("Map to Folder..."), self.map_all_to_folder)
 	register_dropped_files()
 	_validate()
 	# TODO: remove this
@@ -172,13 +172,13 @@ func add_project(paths: PackedStringArray) -> int:
 		FILE_TREE._clear()
 	var err = GDRESettings.load_project(paths, true)
 	if (err != OK):
-		popup_error_box("Error: failed to open " + str(paths), "Error")
+		popup_error_box(tr("Error: failed to open ") + str(paths), tr("Error"))
 		return err
 	var type = GDRESettings.get_pack_type()
 	if (type != PackInfo.PCK and type != PackInfo.EXE):
 		GDRESettings.unload_project()
 		clear_selected_pack()
-		popup_error_box("Error: You can only use this to patch PCKs or embedded PCKs", "Error")
+		popup_error_box(tr("Error: You can only use this to patch PCKs or embedded PCKs"), tr("Error"))
 		return err
 	# need to do this to force it to get a new DirAccess
 	PATCH_FILE_MAPPING_DIALOG.set_access(FileDialog.ACCESS_FILESYSTEM)
@@ -290,9 +290,9 @@ func add_error_to_item(item: TreeItem, message) -> void:
 	if not err_msg.is_empty():
 		if err_msg.contains(message):
 			return
-		err_msg += "\nERROR: " + err_msg
+		err_msg += "\n" + tr("ERROR: ") + err_msg
 	else:
-		err_msg = "ERROR: " + message
+		err_msg = tr("ERROR: ") + message
 	item.set_tooltip_text(1, err_msg)
 
 func clear_error_from_item(item: TreeItem) -> void:
@@ -322,13 +322,13 @@ func _validate():
 	while (item):
 		var messages: PackedStringArray = []
 		if (item.get_text(1).is_empty()):
-			messages.append("Item has empty mapping")
+			messages.append(tr("Item has empty mapping"))
 		elif pack_loaded and DirAccess.dir_exists_absolute(item.get_text(1)):
-			messages.append("Item is mapped to a directory in the source pack")
+			messages.append(tr("Item is mapped to a directory in the source pack"))
 		if reverse_map.has(item.get_text(1)):
-			messages.append("Item has duplicate mapping")
+			messages.append(tr("Item has duplicate mapping"))
 			for dupe_item in reverse_map[item.get_text(1)]:
-				add_error_to_item(dupe_item, "Item has duplicate mapping")
+				add_error_to_item(dupe_item, tr("Item has duplicate mapping"))
 			reverse_map[item.get_text(1)].append(item)
 		else:
 			reverse_map[item.get_text(1)] = [item]
@@ -378,11 +378,11 @@ func confirm():
 	var text = SELECTED_PCK.text.get_file().get_basename() + "_patched"
 	if should_embed():
 		var ext = SELECTED_PCK.text.get_extension();
-		$SavePckDialog.filename_filter = "*.exe,*.bin,*.32,*.64,*.arm64,*.arm32;Self contained executable files"
+		$SavePckDialog.filename_filter = tr("*.exe,*.bin,*.32,*.64,*.arm64,*.arm32;Self contained executable files")
 		if not ext.is_empty():
 			text = text + "." + ext
 	else:
-		$SavePckDialog.filename_filter = "*.pck;PCK files"
+		$SavePckDialog.filename_filter = tr("*.pck;PCK files")
 		text = text + ".pck"
 	$SavePckDialog.current_file = text
 	$SavePckDialog.popup_centered()
@@ -390,7 +390,7 @@ func confirm():
 func _on_save_pck_dialog_file_selected(path: String) -> void:
 	$SavePckDialog.hide()
 	if (not _validate()):
-		popup_error_box("Validation failed", "Error")
+		popup_error_box(tr("Validation failed"), tr("Error"))
 		return
 	GDREMainLoop.call_on_next_process(func(): _do_save(path))
 
@@ -466,8 +466,8 @@ func _on_patch_folders_dropped(folder_paths: PackedStringArray, other_file_paths
 		DROP_FOLDERS_CONFIRMATION_DIALOG.grab_focus()
 	if not empty_folders.is_empty():
 		for path in empty_folders:
-			error_messages.append(path + ": Folder is empty")
-		popup_error_box("\n".join(error_messages), "Error")
+			error_messages.append(path + ": " + tr("Folder is empty"))
+		popup_error_box("\n".join(error_messages), tr("Error"))
 
 func _on_drop_folders_confirmation_close_requested() -> void:
 	%ItemListA.clear()

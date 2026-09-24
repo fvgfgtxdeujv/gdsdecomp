@@ -564,3 +564,4 @@ WARNING: This involves downloading the package from nuget.org and checking the h
 "Select %s...","Select %s...","选择%s..."
 "Directory","Directory","目录"
 " (revision: "," (revision: ","（修订版： "
+"Select items to map!","Select items to map!","请选择要映射的条目！"
