@@ -84,18 +84,18 @@ func add_ver_string(ver_string: String):
 	var tag = ver_to_tag(ver)
 	if report.is_steam_detected():
 		if report.is_mono_detected():
-			ver_string += " (Steam Mono edition)"
+			ver_string += tr(" (Steam Mono edition)")
 		else:
-			ver_string += " (Steam edition)"
+			ver_string += tr(" (Steam edition)")
 	elif report.is_mono_detected():
-		ver_string += " (Mono)"
+		ver_string += tr(" (Mono)")
 	var custom_version_note := ""
 	if report.is_using_double_precision():
-		custom_version_note = ("[b]This Project requires a Godot engine built with double precision.[/b]\n" +
-								"You must build the engine with `precision=double` flag to edit this project.\n" +
-								"[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]See the Godot documentation[/url] for more information.\n")
+		custom_version_note = (tr("[b]This Project requires a Godot engine built with double precision.[/b]\n") +
+								tr("You must build the engine with `precision=double` flag to edit this project.\n") +
+								tr("[url=https://docs.godotengine.org/en/stable/engine_details/development/compiling/index.html]See the Godot documentation[/url] for more information.\n"))
 	elif report.is_custom_version_detected():
-		custom_version_note = "[b]Custom Godot engine version detected!\nYou may encounter errors when opening the project in the editor.[/b]\n" + custom_version_note
+		custom_version_note = tr("[b]Custom Godot engine version detected!\nYou may encounter errors when opening the project in the editor.[/b]\n") + custom_version_note
 	EDITOR_MESSAGE_LABEL.text = EDITOR_MESSAGE_LABEL.text.replace("<GODOT_VER>", "[url=" + get_url_for_tag(tag, report.is_steam_detected()) + "]"+ ver_string + "[/url]")
 	EDITOR_MESSAGE_LABEL.text = EDITOR_MESSAGE_LABEL.text.replace("<CUSTOM_VER_NOTE>", custom_version_note)
 
@@ -195,7 +195,7 @@ func add_report_sections(report_sections: Dictionary, report_labels: Dictionary)
 			if section.size() == 0:
 				%AssetsNote.visible = false
 			else:
-				var txt = DEFAULT_ASSETS_NOTE_TEXT
+				var txt = tr(DEFAULT_ASSETS_NOTE_TEXT)
 				# replace ".assets" with a url to the assets directory
 				txt = txt.replace(".assets", "[url=" + GDRECommon.path_to_uri(recovery_folder + "/.assets") + "].assets[/url]")
 				%AssetsNote.text = txt
@@ -218,9 +218,9 @@ func add_report_sections(report_sections: Dictionary, report_labels: Dictionary)
 					subitem.set_text(0, subkey)
 					subitem.set_text(1, version)
 					var subsubitem: TreeItem = TOTALS_TREE.create_item(subitem)
-					subsubitem.set_text(0, "Download URL:")
+					subsubitem.set_text(0, tr("Download URL:"))
 					subsubitem.set_text(1, download_url)
-					subsubitem.add_button(1, file_icon, TotalsTreeButton.DOWNLOAD_URL, false, "Open download URL")
+					subsubitem.add_button(1, file_icon, TotalsTreeButton.DOWNLOAD_URL, false, tr("Open download URL"))
 			else:
 				for subkey in dict.keys():
 					var val = dict[subkey]
