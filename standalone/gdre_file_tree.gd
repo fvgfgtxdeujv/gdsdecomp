@@ -337,16 +337,16 @@ func pop_right_menu_items(check_name: String = "Item", plural: bool = false, has
 	right_click_menu.clear(true)
 	right_click_menu.reset_size()
 	if self.show_copy_paths_in_right_click_menu:
-		right_click_menu.add_item("Copy path" + ("s" if plural else ""), POPUP_COPY_PATHS)
+		right_click_menu.add_item(tr("Copy paths") if plural else tr("Copy path"), POPUP_COPY_PATHS)
 	if self.check_mode:
-		right_click_menu.add_item("Check " + check_name, POPUP_CHECK_ALL)
-		right_click_menu.add_item("Uncheck " + check_name, POPUP_UNCHECK_ALL)
+		right_click_menu.add_item(tr("Check ") + tr(check_name), POPUP_CHECK_ALL)
+		right_click_menu.add_item(tr("Uncheck ") + tr(check_name), POPUP_UNCHECK_ALL)
 	if not self.flat_mode:
 		# check if the right_click_menu has no items yet
 		if right_click_menu.get_item_count() != 0:
 			right_click_menu.add_separator("", POPUP_SEPERATOR)
-		right_click_menu.add_item("Fold all", POPUP_FOLD_ALL)
-		right_click_menu.add_item("Unfold all", POPUP_UNFOLD_ALL)
+		right_click_menu.add_item(tr("Fold all"), POPUP_FOLD_ALL)
+		right_click_menu.add_item(tr("Unfold all"), POPUP_UNFOLD_ALL)
 		if (has_folder):
 			right_click_menu.set_item_disabled(POPUP_FOLD_ALL, false)
 			right_click_menu.set_item_disabled(POPUP_UNFOLD_ALL, false)
@@ -442,29 +442,29 @@ func sort_tree(item:TreeItem, recursive: bool = true):
 		arr[i].move_after(arr[i - 1])
 
 func sort_entire_tree():
-	match(current_sort):
+	match current_sort:
 		SortType.SORT_NAME_ASCENDING:
-			self.set_column_title(_name_col, nameColumnName + " ▲")
+			self.set_column_title(_name_col, tr(nameColumnName) + " ▲")
 		SortType.SORT_NAME_DESCENDING:
-			self.set_column_title(_name_col, nameColumnName + " ▼")
+			self.set_column_title(_name_col, tr(nameColumnName) + " ▼")
 		_:
-			self.set_column_title(_name_col, nameColumnName)
+			self.set_column_title(_name_col, tr(nameColumnName))
 	if (_size_col_exists):
 		match(current_sort):
 			SortType.SORT_SIZE_DESCENDING:
-				self.set_column_title(_size_col, sizeColumnName + " ▼")
+				self.set_column_title(_size_col, tr(sizeColumnName) + " ▼")
 			SortType.SORT_SIZE_ASCENDING:
-				self.set_column_title(_size_col, sizeColumnName + " ▲")
+				self.set_column_title(_size_col, tr(sizeColumnName) + " ▲")
 			_:
-				self.set_column_title(_size_col, sizeColumnName)
+				self.set_column_title(_size_col, tr(sizeColumnName))
 	if (_info_col_exists):
 		match(current_sort):
 			SortType.SORT_INFO:
-				self.set_column_title(_info_col, infoColumnName + " ▲")
+				self.set_column_title(_info_col, tr(infoColumnName) + " ▲")
 			SortType.SORT_REVERSE_INFO:
-				self.set_column_title(_info_col, infoColumnName + " ▼")
+				self.set_column_title(_info_col, tr(infoColumnName) + " ▼")
 			_:
-				self.set_column_title(_info_col, infoColumnName)
+				self.set_column_title(_info_col, tr(infoColumnName))
 	sort_tree(root)
 	if (userroot):
 		sort_tree(userroot)
@@ -564,16 +564,16 @@ func _add_file_from_packed_info(info: PackedFileInfo, skipped_md5_check: bool = 
 	var is_malformed = info.is_malformed()
 	var is_verified = info.is_checksum_validated()
 	var has_md5 = info.has_md5()
-	var p_info = "Encrypted" if info.is_encrypted() else ""
+	var p_info = tr("Encrypted") if info.is_encrypted() else ""
 	var icon = file_icon
 	var errstr = ""
 	if is_malformed:
 		icon = file_broken
-		errstr = "Malformed path"
+		errstr = tr("Malformed path")
 		num_malformed += 1
 	if ((info.is_encrypted() or path.get_extension().to_lower() == "gde") and had_encryption_error):
 		icon = file_encrypted
-		errstr = "Encryption error"
+		errstr = tr("Encryption error")
 		num_broken += 1
 	elif is_verified:
 		icon = file_ok
@@ -581,7 +581,7 @@ func _add_file_from_packed_info(info: PackedFileInfo, skipped_md5_check: bool = 
 		icon = file_icon
 	elif !is_verified && has_md5:
 		icon = file_broken
-		errstr = "Checksum mismatch"
+		errstr = tr("Checksum mismatch")
 		num_broken += 1
 	var item
 
@@ -761,15 +761,15 @@ func _ready():
 	self.connect("gui_input", self._on_gui_input)
 	self.connect("empty_clicked", self._on_empty_clicked)
 	self.connect("column_title_clicked", self._on_column_title_clicked)
-	self.set_column_title(_name_col, nameColumnName)
+	self.set_column_title(_name_col, tr(nameColumnName))
 	self.set_column_expand(_name_col, true)
 	self.add_theme_constant_override("draw_relationship_lines", 1)
 	if (_size_col_exists):
-		self.set_column_title(_size_col, sizeColumnName)
+		self.set_column_title(_size_col, tr(sizeColumnName))
 		self.set_column_expand(_size_col, false)
 		self.set_column_custom_minimum_width(_size_col, 120)
 	elif (_info_col_exists):
-		self.set_column_title(_info_col, infoColumnName)
+		self.set_column_title(_info_col, tr(infoColumnName))
 		self.set_column_custom_minimum_width(_info_col, 120)
 		self.set_column_expand(_info_col, false)
 	self.connect("item_edited", self._on_item_edited)
