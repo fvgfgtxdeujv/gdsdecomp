@@ -174,11 +174,11 @@ func _load_project(paths: PackedStringArray):
 		GDRESettings.unload_project()
 	var err = GDRESettings.load_project(paths, true)
 	if err != OK:
-		popup_error_box("Failed to load project:\n" + GDRESettings.get_recent_error_string(), "Error")
+		popup_error_box(tr("Failed to load project:\n") + GDRESettings.get_recent_error_string(), tr("Error"))
 		return
 	err = GDRESettings.post_load_patch_translation()
 	if err != OK:
-		popup_error_box("Failed to load import files:\n" + GDRESettings.get_recent_error_string(), "Error")
+		popup_error_box(tr("Failed to load import files:\n") + GDRESettings.get_recent_error_string(), tr("Error"))
 		GDRESettings.unload_project()
 		return
 	%ProjectField.text = GDRESettings.get_pack_path()
@@ -202,7 +202,7 @@ func _reload_action_option_button(enable_direct_patch: bool):
 			continue
 		if (action == ActionOption.PATCH_PCK_DIRECTLY and not enable_direct_patch):
 			continue
-		opt.add_item(ACTION_LABELS[action], action)
+		opt.add_item(tr(ACTION_LABELS[action]), action)
 	opt.select(ActionOption.OUTPUT_TO_DIR)
 
 func _reload_csv_option_buttons(keys: Dictionary[String, PackedStringArray]):
@@ -276,7 +276,7 @@ func _on_select_csv_dialog_file_selected(path: String) -> void:
 	current_csv_info.clear()
 	current_csv_messages = TranslationExporter.get_csv_messages(path, current_csv_info)
 	if current_csv_messages.size() == 0:
-		popup_error_box("Invalid CSV file:\n" + GDRESettings.get_recent_error_string(), "Error")
+		popup_error_box(tr("Invalid CSV file:\n") + GDRESettings.get_recent_error_string(), tr("Error"))
 		csv_field.text = ""
 		return
 
@@ -287,12 +287,12 @@ func _on_select_csv_dialog_file_selected(path: String) -> void:
 	if opt.selected != -1:
 		var selected_source = opt.get_item_text(opt.selected)
 		if (not selected_source.is_empty() and current_csv_info.get("new_non_empty_count", 0) != cached_translation_info.get(selected_source, 0)):
-			var msg = "The CSV file has a different number of messages than the translation file.\n"
-			msg += "CSV file keys = %d\n" % current_csv_info.get("new_non_empty_count", 0)
-			msg += "Translation messages = %d\n" % cached_translation_info.get(selected_source, 0)
+			var msg = tr("The CSV file has a different number of messages than the translation file.\n")
+			msg += tr("CSV file keys = %d\n") % current_csv_info.get("new_non_empty_count", 0)
+			msg += tr("Translation messages = %d\n") % cached_translation_info.get(selected_source, 0)
 			if current_csv_info.get("missing_keys", 0) > 0:
-				msg += "The resulting patched translation file may be corrupted!\n"
-			popup_error_box(msg + "Please ensure that the correct translation is selected and the CSV file is up to date.", "Warning")
+				msg += tr("The resulting patched translation file may be corrupted!\n")
+			popup_error_box(msg + tr("Please ensure that the correct translation is selected and the CSV file is up to date."), tr("Warning"))
 
 func do_it(output: String):
 	GDRESettings.get_recent_error_string()
@@ -309,7 +309,7 @@ func do_it(output: String):
 	GDRECommon.ensure_dir(output_dir)
 
 	if translation_entries.size() == 0:
-		popup_error_box("Please add at least one translation", "Error")
+		popup_error_box(tr("Please add at least one translation"), tr("Error"))
 		return
 
 	var r_file_map: Dictionary[String, String] = {}
@@ -319,15 +319,15 @@ func do_it(output: String):
 	for entry in translation_entries.values():
 		err = TranslationExporter.patch_translations(output_dir, entry.csv_path, ImportInfo.copy(entry.import_info), entry.selected_locales, r_file_map)
 		if err != OK:
-			popup_error_box("Failed to patch translation " + entry.translation_source + ":\n" + GDRESettings.get_recent_error_string(), "Error")
+			popup_error_box(tr("Failed to patch translation ") + entry.translation_source + ":\n" + GDRESettings.get_recent_error_string(), tr("Error"))
 			return
 
 	err = TranslationExporter.patch_project_config(output_dir, r_file_map)
 	if err != OK:
-		popup_error_box("Failed to patch project config:\n" + GDRESettings.get_recent_error_string(), "Error")
+		popup_error_box(tr("Failed to patch project config:\n") + GDRESettings.get_recent_error_string(), tr("Error"))
 		return
 	if get_selected_action() == ActionOption.OUTPUT_TO_DIR:
-		popup_error_box("Translation patched successfully", "Success", self.close)
+		popup_error_box(tr("Translation patched successfully"), tr("Success"), self.close)
 	elif get_selected_action() == ActionOption.CREATE_PATCH_PCK:
 		var engine_version: GodotVer = GodotVer.parse_godotver(GDRESettings.get_version_string())
 		var pck_creator = PckCreator.new()
@@ -349,13 +349,13 @@ func do_it(output: String):
 								"")
 		err = pck_creator.add_files(r_file_map)
 		if err != OK:
-			popup_error_box("Failed to add files to patch PCK:\n" + GDRESettings.get_recent_error_string(), "Error")
+			popup_error_box(tr("Failed to add files to patch PCK:\n") + GDRESettings.get_recent_error_string(), tr("Error"))
 			return
 		err = pck_creator.finish_pck()
 		if err != OK:
-			popup_error_box("Failed to finish patch PCK:\n" + GDRESettings.get_recent_error_string(), "Error")
+			popup_error_box(tr("Failed to finish patch PCK:\n") + GDRESettings.get_recent_error_string(), tr("Error"))
 			return
-		popup_error_box("Patch PCK created successfully", "Success", self.close)
+		popup_error_box(tr("Patch PCK created successfully"), tr("Success"), self.close)
 	elif get_selected_action() == ActionOption.PATCH_PCK_DIRECTLY:
 		var pck_files = GDRESettings.get_file_list()
 		var new_map: Dictionary[String, String] = {}
@@ -390,7 +390,7 @@ func _repopulate_select_translation_button():
 
 func _on_add_translation_button_pressed() -> void:
 	if not GDRESettings.is_pack_loaded():
-		popup_error_box("Please load a project first", "Error")
+		popup_error_box(tr("Please load a project first"), tr("Error"))
 		return
 
 	# Reset the AddTranslationDialog
@@ -415,18 +415,18 @@ func _on_add_translation_dialog_confirmed() -> void:
 	var csv_field: LineEdit = %CSVField
 
 	if opt.selected == -1:
-		popup_error_box("Please select a translation", "Error")
+		popup_error_box(tr("Please select a translation"), tr("Error"))
 		return
 
 	if csv_field.text.is_empty():
-		popup_error_box("Please select a CSV file", "Error")
+		popup_error_box(tr("Please select a CSV file"), tr("Error"))
 		return
 
 	var selected_source = opt.get_item_text(opt.selected)
 	var selected_locales = _get_add_dialog_selected_locales()
 
 	if selected_locales.size() == 0:
-		popup_error_box("Please select at least one locale", "Error")
+		popup_error_box(tr("Please select at least one locale"), tr("Error"))
 		return
 
 	# Create translation entry
@@ -456,7 +456,7 @@ func _update_translation_entries_display():
 	# Update the tree to show only added translations
 	var tree = %GDREFileTree
 	tree.clear()
-	tree.set_column_title(1, "CSV Path")
+	tree.set_column_title(1, tr("CSV Path"))
 	tree.set_column_custom_minimum_width(2, 300)
 
 	# Only show translations that have been added
