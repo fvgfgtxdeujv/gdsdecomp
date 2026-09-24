@@ -433,15 +433,19 @@ jobs:
         shell: bash
         run: |
           set -e
+          # Godot 4.4+ saves CSV translation sidecar files next to the source
+          # CSV; older versions saved them under .godot/imported/.
+          translations_dir="${{github.workspace}}/modules/gdsdecomp/standalone/translations"
           imported_dir="${{github.workspace}}/modules/gdsdecomp/standalone/.godot/imported"
-          if ! ls "$imported_dir"/gdre_strings*.translation* >/dev/null 2>&1; then
-            echo "::error::No compiled gdre_strings.*.translation files found under .godot/imported after export."
+          found=$(ls "$translations_dir"/gdre_strings*.translation "$imported_dir"/gdre_strings*.translation* 2>/dev/null || true)
+          if [ -z "$found" ]; then
+            echo "::error::No compiled gdre_strings.*.translation files found after export."
             echo "::error::The UI translations were NOT embedded in the ${{ matrix.export-preset }} build."
             echo "::error::Check that standalone/translations/gdre_strings.csv imports without errors."
             exit 1
           fi
           echo "Compiled UI translation tables embedded in this export:"
-          ls "$imported_dir"/gdre_strings*.translation* | xargs -n1 basename
+          echo "$found" | xargs -n1 basename
 
       - uses: actions/upload-artifact@v4
         with:

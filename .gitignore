@@ -323,4 +323,9 @@ standalone/character*
 .tmpcache/
 external_install/
 
+# Generated UI translation sidecar files (compiled from gdre_strings.csv by
+# `--import` during export; Godot 4.4+ saves them next to the source CSV)
+standalone/translations/*.translation
+standalone/translations/*.translation.import
+
 !build/

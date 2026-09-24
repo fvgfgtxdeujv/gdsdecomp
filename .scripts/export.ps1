@@ -408,11 +408,17 @@ if ($proc.ExitCode -ne 0) {
 
 # Confirm the compiled UI translation tables exist; they are referenced from
 # project.godot's [internationalization] section and therefore baked into the
-# export. Warn loudly (without aborting) if a CSV failed to import.
-$imported_dir = Join-Path $standaloneDir ".godot/imported"
-$translation_artifacts = Get-ChildItem $imported_dir -Filter "gdre_strings*.translation*" -ErrorAction SilentlyContinue
+# export. Godot 4.4+ saves CSV translation sidecar files next to the source
+# CSV (translations/); older versions saved them under .godot/imported/.
+# Warn loudly (without aborting) if a CSV failed to import.
+$translation_artifacts = Get-ChildItem (Join-Path $standaloneDir "translations") -Filter "gdre_strings*.translation" -ErrorAction SilentlyContinue
 if ($null -eq $translation_artifacts) {
-    echo "WARNING: no compiled gdre_strings.*.translation files found under .godot/imported after import."
+    # Fall back to the pre-4.4 location
+    $imported_dir = Join-Path $standaloneDir ".godot/imported"
+    $translation_artifacts = Get-ChildItem $imported_dir -Filter "gdre_strings*.translation*" -ErrorAction SilentlyContinue
+}
+if ($null -eq $translation_artifacts) {
+    echo "WARNING: no compiled gdre_strings.*.translation files found after import."
     echo "WARNING: the exported build may be missing the bundled UI translations."
     echo "WARNING: check that standalone/translations/gdre_strings.csv imports without errors."
 }
