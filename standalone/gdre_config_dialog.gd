@@ -28,14 +28,14 @@ const FILEPICKER_ICON = preload("res://gdre_icons/gdre_FileBrowse.svg")
 func create_section_label(text: String) -> Label:
 	var label: Label = Label.new()
 	label.label_settings = SECTION_LABEL_SETTINGS
-	label.text = text + " Settings"
+	label.text = tr(text) + " " + tr("Settings")
 	label.horizontal_alignment = 1
 	return label
 
 func create_subsection_label(text: String) -> Label:
 	var label: Label = Label.new()
 	label.label_settings = SUBSECTION_LABEL_SETTINGS
-	label.text = text
+	label.text = tr(text)
 	label.horizontal_alignment = 1
 	return label
 
@@ -63,7 +63,7 @@ func create_new_subsection(text: String, section: VBoxContainer) -> VBoxContaine
 
 func create_new_subsubsection(text: String, subsection: VBoxContainer) -> VBoxContainer:
 	var subsubsection: FoldableContainer = FoldableContainer.new()
-	subsubsection.title = text
+	subsubsection.title = tr(text)
 	subsubsection.title_alignment = 1
 	if subsection.get_child_count() != 2: # including the label and h_separator
 		subsection.add_child(create_h_separator())
@@ -203,7 +203,7 @@ func create_setting_button(setting: GDREConfigSetting) -> Control:
 	if setting.is_filepicker() or setting.is_dirpicker():
 		button = Button.new()
 		if setting.is_virtual_setting():
-			button.text = "Select %s..." % ["File" if setting.is_filepicker() else "Directory"]
+			button.text = tr("Select %s...") % [tr("File") if setting.is_filepicker() else tr("Directory")]
 		else:
 			button.text = ""
 			button.icon = FILEPICKER_ICON
@@ -274,7 +274,7 @@ func create_setting_button(setting: GDREConfigSetting) -> Control:
 		button.custom_minimum_size = Vector2i(80,0)
 		button.text = ';'.join(value)
 		var label: Label = make_button_label(setting.get_brief_description())
-		label.tooltip_text = 'Seperate items with a semicolon (;).\n' + setting.get_description()
+		label.tooltip_text = tr("Seperate items with a semicolon (;).") + "\n" + setting.get_description()
 		control = make_button_hbox(setting, button, label)
 		button.text_changed.connect(func(val): setting_callback(setting, val.split(";"), control))
 
