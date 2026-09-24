@@ -86,7 +86,7 @@ const MAX_LONG_LINE_LENGTH: int = 60
 func _repopulate_bytecode_selector(versions: PackedStringArray, split_long_versions: bool = false) -> void:
 	var prev_selected_id = %BytecodeSelector.get_selected_id()
 	%BytecodeSelector.clear()
-	%BytecodeSelector.add_item("--- Please select bytecode version ---")
+	%BytecodeSelector.add_item(tr("--- Please select bytecode version ---"))
 	for version in versions:
 		if split_long_versions and version.length() > MAX_LONG_LINE_LENGTH:
 			var lines: PackedStringArray = []
@@ -115,7 +115,7 @@ func _repopulate_bytecode_selector(versions: PackedStringArray, split_long_versi
 
 
 func _ready() -> void:
-	self.add_cancel_button("Cancel")
+	self.add_cancel_button(tr("Cancel"))
 	var versions = GDScriptDecomp.get_bytecode_versions()
 	if %BytecodeSelector.get_item_count() != versions.size() + 1:
 		_repopulate_bytecode_selector(versions)
