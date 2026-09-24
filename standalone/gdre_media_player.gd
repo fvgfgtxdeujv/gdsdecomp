@@ -206,26 +206,26 @@ Loop Mode: %s"""
 func loopmode_to_string(mode: int) -> String:
 	match mode:
 		AudioStreamWAV.LOOP_DISABLED:
-			return "Disabled"
+			return tr("Disabled")
 		AudioStreamWAV.LOOP_FORWARD:
-			return "Forward"
+			return tr("Forward")
 		AudioStreamWAV.LOOP_PINGPONG:
-			return "PingPong"
+			return tr("PingPong")
 		AudioStreamWAV.LOOP_BACKWARD:
-			return "Backward"
-	return "Unknown"
+			return tr("Backward")
+	return tr("Unknown")
 
 func sample_format_to_string(format: int) -> String:
 	match format:
 		AudioStreamWAV.FORMAT_8_BITS:
-			return "PCM 8-bit"
+			return tr("PCM 8-bit")
 		AudioStreamWAV.FORMAT_16_BITS:
-			return "PCM 16-bit"
+			return tr("PCM 16-bit")
 		AudioStreamWAV.FORMAT_IMA_ADPCM:
-			return "ADPCM"
+			return tr("ADPCM")
 		AudioStreamWAV.FORMAT_QOA:
-			return "Quite OK"
-	return "Unknown"
+			return tr("Quite OK")
+	return tr("Unknown")
 
 func is_supported_video_format(path) -> bool:
 	var ext = path.get_extension().to_lower()
@@ -299,28 +299,28 @@ func load_audio_stream(audio_stream: AudioStream):
 
 		AUDIO_STREAM_INFO.text = sample_info_box_text_format % [sample.mix_rate, 2 if sample.stereo else 1, sample_format_to_string(sample.format),  loopmode_to_string(sample.loop_mode)]
 		if (sample.loop_mode != AudioStreamWAV.LOOP_DISABLED):
-			AUDIO_STREAM_INFO.text += "\nLoop Begin: " + str(sample.loop_begin) + "\nLoop End: " + str(sample.loop_end)
+			AUDIO_STREAM_INFO.text += "\n" + tr("Loop Begin: ") + str(sample.loop_begin) + "\n" + tr("Loop End: ") + str(sample.loop_end)
 	elif (audio_stream.get_class() == "AudioStreamOggVorbis" or audio_stream.get_class() == "AudioStreamMP3"):
 		var info_string = ""
 		var sampling_rate: String = "unknown"
 		if audio_stream.get_class() == "AudioStreamOggVorbis":
 			sampling_rate = str(int(audio_stream.packet_sequence.sampling_rate))
-			info_string += "Ogg Vorbis"
-			info_string += "\nSample Rate: " + sampling_rate + " Hz"
+			info_string += tr("Ogg Vorbis")
+			info_string += "\n" + tr("Sample Rate: ") + sampling_rate + " Hz"
 		elif audio_stream.get_class() == "AudioStreamMP3":
-			info_string += "MP3"
+			info_string += tr("MP3")
 			# no sample rate information for MP3 in Godot yet
 		if (audio_stream.bpm != 0):
-			info_string += "\nBPM: " + str(audio_stream.bpm)
+			info_string += "\n" + tr("BPM: ") + str(audio_stream.bpm)
 		if (audio_stream.bar_beats != 4):
-			info_string += "\nBar Beats: " + str(audio_stream.bar_beats)
+			info_string += "\n" + tr("Bar Beats: ") + str(audio_stream.bar_beats)
 		if (audio_stream.beat_count != 0):
-			info_string += "\nBeat Count: " + str(audio_stream.beat_count)
+			info_string += "\n" + tr("Beat Count: ") + str(audio_stream.beat_count)
 		if (audio_stream.loop):
-			info_string += "\nLoop: Yes"
-			info_string += "\nLoop Offset: " + str(audio_stream.loop_offset)
+			info_string += "\n" + tr("Loop: Yes")
+			info_string += "\n" + tr("Loop Offset: ") + str(audio_stream.loop_offset)
 		else:
-			info_string += "\nLoop: No"
+			info_string += "\n" + tr("Loop: No")
 		AUDIO_STREAM_INFO.text = info_string
 	else:
 		AUDIO_STREAM_INFO.text = ""
